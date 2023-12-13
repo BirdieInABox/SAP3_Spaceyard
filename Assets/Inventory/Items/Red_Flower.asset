@@ -15,4 +15,4 @@ MonoBehaviour:
   displayName: Red Flower
   itemID: 1
   icon: {fileID: 21300000, guid: b0b1644ef088a5546833bc79034d4fd7, type: 3}
-  prefab: {fileID: 0}
+  prefab: {fileID: 5889009682319162852, guid: dcb0cbb34d7c30e4cb0d754250fe46d1, type: 3}
