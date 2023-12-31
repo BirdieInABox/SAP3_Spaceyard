@@ -610,7 +610,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 78
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1001 &155003921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2908,10 +2908,11 @@ GameObject:
   - component: {fileID: 1208930808}
   - component: {fileID: 1208930807}
   - component: {fileID: 1208930806}
+  - component: {fileID: 1208930810}
   - component: {fileID: 1208930805}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3003,13 +3004,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208930804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 249.62257, y: -259.12872, z: 1984.5924}
+  m_LocalPosition: {x: 155, y: -1042.5, z: 148.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1208930810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208930804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35a360dabd25aea4fb2f40de136d42eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectType: 1
+  questGiver: {fileID: 0}
 --- !u!1001 &1365745254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3251,8 +3266,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1496398, y: 14.742584, z: 1.9860773}
-  m_Center: {x: -0.077427864, y: 7.371292, z: -0.30755773}
+  m_Size: {x: 1.1496398, y: 14.742584, z: 1.5520782}
+  m_Center: {x: -0.077427864, y: 7.371292, z: 0.06957245}
 --- !u!114 &1409131047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3331,6 +3346,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+--- !u!65 &1409131050
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409131037}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8272966, y: 15.026794, z: 1.4718094}
+  m_Center: {x: -0.23859948, y: 7.370941, z: 1.2870522}
 --- !u!224 &1457541636 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9120680961871942298, guid: 45bcbedc52d5ea74dbd26379a4367621, type: 3}
@@ -4761,6 +4789,10 @@ PrefabInstance:
     - target: {fileID: 6389229519164161589, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
       propertyPath: m_Name
       value: Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 6389229519164161589, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}

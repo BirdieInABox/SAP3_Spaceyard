@@ -11,10 +11,13 @@ public class Player : MonoBehaviour
     private Vector2 rotation = Vector2.zero;
     private float maxVelocityChange = 10f;
     private Vector2 direction;
+    private BoxCollider touchSensor;
+    private GameObject interactObject;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        touchSensor = GetComponent<BoxCollider>();
         rb.freezeRotation = true;
         rb.useGravity = false;
         rotation.y = transform.eulerAngles.y;
@@ -37,6 +40,20 @@ public class Player : MonoBehaviour
 
     public void OnInteract(InputValue value)
     {
-        //Interact
+        if (interactObject != null)
+            interactObject.GetComponent<InteractableObject>().Interaction(this.gameObject);
+
+    }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Interactable")
+            interactObject = other.gameObject;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        interactObject = null;
     }
 }
