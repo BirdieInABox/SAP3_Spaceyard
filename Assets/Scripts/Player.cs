@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private Vector2 direction;
     private BoxCollider touchSensor;
     private GameObject interactObject;
+    private NPC interactNPC;
+    private bool inDialogue = false;
 
     void Awake()
     {
@@ -42,18 +44,33 @@ public class Player : MonoBehaviour
     {
         if (interactObject != null)
             interactObject.GetComponent<InteractableObject>().Interaction(this.gameObject);
-
+        else if (interactNPC != null)
+        {
+            if (!inDialogue)
+            {
+                inDialogue = true;
+                interactNPC.InteractionStart();
+            }
+            else
+            {
+                interactNPC.InteractionContinue();
+            }
+        }
     }
-
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Interactable")
             interactObject = other.gameObject;
+        else if (other.gameObject.tag == "NPC")
+            interactNPC = other.gameObject.GetComponent<NPC>();
     }
 
     void OnTriggerExit(Collider other)
     {
-        interactObject = null;
+        if (other.gameObject.tag == "Interactable")
+            interactObject = null;
+        else if (other.gameObject.tag == "NPC")
+            interactNPC = null;
     }
 }
