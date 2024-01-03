@@ -4,38 +4,66 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
+    [SerializeField]
+    private Tasks tasks;
+
+    //FIXME: connect this choice to the list of tasks in Tasks.cs
     private enum ObjectType
     {
-        Candle,
-        Grave,
-        Flowerbed,
-        Grass
+        Grave = 0,
+        Grass = 1,
+        Candle = 2,
+        Flowerbed = 3,
+        Other = 99
     }
-    /* private enum InventoryItem
-     {
-         Lighter,
-         Sponge,
-         Flower,
-         Sickle
-     }*/
 
-    [SerializeField] private ObjectType objectType;
-    [SerializeField] private GameObject questGiver;
+    [SerializeField]
+    private ObjectType objectType;
+
+    [SerializeField]
+    private NPC questGiver;
+
     // Start is called before the first frame update
 
-    public void Interaction(GameObject player)
+    public void Interaction(Player player)
     {
         //Check for item
-        /* switch (ObjectType)
-         {
-             Candle: 
-             Grave:
-             Flowerbed:
-             Grass:
-             default:
-         }*/
-        //Check if Questgiver wants this interaction
-        //Player animation
+        switch (objectType)
+        {
+            case ObjectType.Grave:
+                //Check for item
+                HandleTask(player, tasks.GetTaskID((int)ObjectType.Grave));
+                break;
+            case ObjectType.Grass:
+                //Check for item
+                HandleTask(player, tasks.GetTaskID((int)ObjectType.Grass));
+                break;
+            case ObjectType.Candle:
+                //Check for item
+                HandleTask(player, tasks.GetTaskID((int)ObjectType.Candle));
+                break;
+            case ObjectType.Flowerbed:
+                //Check for item
+                HandleTask(player, tasks.GetTaskID((int)ObjectType.Flowerbed));
+                break;
+            default:
+                player.anims.SetTrigger("Interact");
+                break;
+        }
+
         Debug.Log("I am an Interaction!");
+    }
+
+    private void HandleTask(Player player, int taskID)
+    {
+        player.anims.SetFloat("TaskID", taskID);
+        player.anims.SetTrigger("DoTask");
+        questGiver.FinishTask();
+        FinishTask();
+    }
+
+    public void FinishTask()
+    {
+        //Replace this model with the cleared model
     }
 }

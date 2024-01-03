@@ -4,23 +4,35 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IInitializePotentialDragHandler, IDropHandler
+public class InventoryItem
+    : MonoBehaviour,
+        IBeginDragHandler,
+        IDragHandler,
+        IEndDragHandler,
+        IInitializePotentialDragHandler,
+        IDropHandler
 {
     public Transform parentAfterDrag { get; set; }
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
+
     [SerializeField]
     private Canvas uiCanvas;
 
     public ItemData data { get; private set; }
     public int stackSize { get; private set; }
 
-
     public InventoryItem(ItemData source)
     {
         data = source;
         IncreaseStack();
     }
+
+    public ItemData GetData()
+    {
+        return data;
+    }
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -52,7 +64,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         // transform.Translate(eventData.delta * uiCanvas.transform.localScale);
         // (eventData.delta * uiCanvas.transform.localScale);
         //Debug.Log(eventData.delta * uiCanvas.transform.localScale);
-
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -61,14 +72,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         canvasGroup.blocksRaycasts = true;
 
         rectTransform.anchoredPosition = new Vector3(0, 0, 0);
-
     }
+
     public void OnInitializePotentialDrag(PointerEventData eventData)
     {
         eventData.useDragThreshold = false;
     }
 
-    public void OnDrop(PointerEventData eventData)
-    {
-    }
+    public void OnDrop(PointerEventData eventData) { }
 }

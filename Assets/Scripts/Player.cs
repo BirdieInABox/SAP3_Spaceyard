@@ -13,8 +13,19 @@ public class Player : MonoBehaviour
     private Vector2 direction;
     private BoxCollider touchSensor;
     private GameObject interactObject;
+    public Animator anims;
+
+    //[SerializeField]
     private NPC interactNPC;
     private bool inDialogue = false;
+
+    public void toggleDialogue()
+    {
+        if (inDialogue)
+            inDialogue = false;
+        else
+            inDialogue = true;
+    }
 
     void Awake()
     {
@@ -26,12 +37,14 @@ public class Player : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        anims = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         rb.velocity = new Vector3(direction.x * moveSpeed, rb.velocity.y, direction.y * moveSpeed);
+        anims.SetBool("Walk", rb.velocity != new Vector3(0, 0, 0));
     }
 
     public void OnMove(InputValue value)
@@ -43,12 +56,11 @@ public class Player : MonoBehaviour
     public void OnInteract(InputValue value)
     {
         if (interactObject != null)
-            interactObject.GetComponent<InteractableObject>().Interaction(this.gameObject);
+            interactObject.GetComponent<InteractableObject>().Interaction(this);
         else if (interactNPC != null)
         {
             if (!inDialogue)
             {
-                inDialogue = true;
                 interactNPC.InteractionStart();
             }
             else

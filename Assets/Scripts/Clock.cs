@@ -13,6 +13,7 @@ public class Clock : MonoBehaviour
     [SerializeField] //The start of the rotation in the circle
     private int minimum = 0;
 
+    
     //The calculated percentile of each integer
     private float percentile;
 
