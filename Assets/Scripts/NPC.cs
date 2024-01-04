@@ -37,7 +37,7 @@ public class NPC : MonoBehaviour
     /// any of the Update methods is called the first time.
     /// </summary>
     /*void Start()
-    {
+    { //DEBUGGING
         InteractionStart();
     }*/
     public void ResetTasks()
@@ -46,10 +46,14 @@ public class NPC : MonoBehaviour
         taskDone = false;
         RandomizeTask();
     }
-    private void SpawnTask()
+
+    void Awake()
     {
-        
+        float transparencyOnStart = 0f;
+        ChangeTransparency(transparencyOnStart);
     }
+
+    private void SpawnTask() { }
 
     private void ChooseDialogue()
     {
@@ -74,9 +78,35 @@ public class NPC : MonoBehaviour
         affection++;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            float transparencyOnAppearance = 1f;
+            ChangeTransparency(transparencyOnAppearance);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            float transparencyOnAppearance = 0f;
+            ChangeTransparency(transparencyOnAppearance);
+        }
+    }
+
+    //FIXME: Needs material shader that allows transparency
+    private void ChangeTransparency(float transparency)
+    {
+        var col = this.gameObject.GetComponent<Renderer>().material.color;
+        Debug.Log(col.a);
+        Debug.Log(transparency);
+        col.a = transparency;
+    }
+
     public void InteractionStart()
     {
-        
         ChooseDialogue();
         dialogueSystem.DialogueStart(dialogues[dialogueID].lines);
     }

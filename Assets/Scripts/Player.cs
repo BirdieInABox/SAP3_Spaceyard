@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private Vector2 direction;
     private BoxCollider touchSensor;
     private GameObject interactObject;
+
     public Animator anims;
 
     //[SerializeField]
@@ -44,19 +45,31 @@ public class Player : MonoBehaviour
     void Update()
     {
         rb.velocity = new Vector3(direction.x * moveSpeed, rb.velocity.y, direction.y * moveSpeed);
-        anims.SetBool("Walk", rb.velocity != new Vector3(0, 0, 0));
+        anims.SetBool("Walking", rb.velocity != new Vector3(0, 0, 0));
     }
 
     public void OnMove(InputValue value)
     {
         direction = value.Get<Vector2>();
-        Debug.Log(direction);
     }
 
     public void OnInteract(InputValue value)
     {
         if (interactObject != null)
-            interactObject.GetComponent<InteractableObject>().Interaction(this);
+        {
+            if (
+                interactObject.TryGetComponent<InteractableObject>(
+                    out InteractableObject currObject
+                )
+            )
+            {
+                currObject.Interaction(this);
+            }
+            else if (interactObject.TryGetComponent<Bed>(out Bed currBed))
+            {
+                currBed.Interaction(this);
+            }
+        }
         else if (interactNPC != null)
         {
             if (!inDialogue)
@@ -68,6 +81,8 @@ public class Player : MonoBehaviour
                 interactNPC.InteractionContinue();
             }
         }
+        else if (interactObject != null)
+            interactObject.GetComponent<InteractableObject>().Interaction(this);
     }
 
     void OnTriggerEnter(Collider other)
