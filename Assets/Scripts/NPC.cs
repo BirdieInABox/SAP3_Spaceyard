@@ -32,14 +32,9 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private Tasks tasks;
 
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
-    /*void Start()
-    { //DEBUGGING
-        InteractionStart();
-    }*/
+    [SerializeField]
+    private InteractableObject[] objectives;
+
     public void ResetTasks()
     {
         taskAccepted = false;
@@ -51,9 +46,10 @@ public class NPC : MonoBehaviour
     {
         float transparencyOnStart = 0f;
         ChangeTransparency(transparencyOnStart);
+        ResetTasks();
     }
 
-    private void SpawnTask() { }
+    private void StartTask(int index) { }
 
     private void ChooseDialogue()
     {
@@ -100,8 +96,6 @@ public class NPC : MonoBehaviour
     private void ChangeTransparency(float transparency)
     {
         var col = this.gameObject.GetComponent<Renderer>().material.color;
-        Debug.Log(col.a);
-        Debug.Log(transparency);
         col.a = transparency;
     }
 
@@ -119,6 +113,8 @@ public class NPC : MonoBehaviour
     private void RandomizeTask()
     {
         System.Random random = new System.Random();
-        todaysTask = tasks.GetTaskID(random.Next(tasks.NumOfTasks()));
+        int taskIndex = random.Next(0, tasks.NumOfTasks() - 1);
+        todaysTask = tasks.GetTaskID(taskIndex);
+        StartTask(taskIndex);
     }
 }

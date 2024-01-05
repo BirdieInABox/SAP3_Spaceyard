@@ -22,36 +22,39 @@ public class InteractableObject : MonoBehaviour
 
     [SerializeField]
     private NPC questGiver;
+    private bool isDone = false;
 
     // Start is called before the first frame update
 
     public void Interaction(Player player)
     {
-        //Check for item
-        switch (objectType)
-        {
-            case ObjectType.Grave:
-                //Check for item
-                HandleTask(player, tasks.GetTaskID((int)ObjectType.Grave));
-                break;
-            case ObjectType.Grass:
-                //Check for item
-                HandleTask(player, tasks.GetTaskID((int)ObjectType.Grass));
-                break;
-            case ObjectType.Candle:
-                //Check for item
-                HandleTask(player, tasks.GetTaskID((int)ObjectType.Candle));
-                break;
-            case ObjectType.Flowerbed:
-                //Check for item
-                HandleTask(player, tasks.GetTaskID((int)ObjectType.Flowerbed));
-                break;
-            default:
-                player.anims.SetTrigger("Interact");
-                break;
-        }
+        if (!isDone)
+        { //Check for item
+            switch (objectType)
+            {
+                case ObjectType.Grave:
+                    //Check for item
+                    HandleTask(player, tasks.GetTaskID((int)ObjectType.Grave));
+                    break;
+                case ObjectType.Grass:
+                    //Check for item
+                    HandleTask(player, tasks.GetTaskID((int)ObjectType.Grass));
+                    break;
+                case ObjectType.Candle:
+                    //Check for item
+                    HandleTask(player, tasks.GetTaskID((int)ObjectType.Candle));
+                    break;
+                case ObjectType.Flowerbed:
+                    //Check for item
+                    HandleTask(player, tasks.GetTaskID((int)ObjectType.Flowerbed));
+                    break;
+                default:
+                    player.anims.SetTrigger("Interact");
+                    break;
+            }
 
-        Debug.Log("I am an Interaction!");
+            Debug.Log("I am an Interaction!");
+        }
     }
 
     private void HandleTask(Player player, int taskID)
@@ -64,6 +67,20 @@ public class InteractableObject : MonoBehaviour
 
     public void FinishTask()
     {
-        //Replace this model with the cleared model
+        isDone = true;
+        //FIXME: Replace this model with the cleared model
+
+    
+
+        this.gameObject.SetActive(false);
+    }
+
+    public void StartTask()
+    {
+        isDone = false;
+        //FIXME: ADD TO JOURNAL
+
+        //FIXME: Replace this model with the uncleared model
+        this.gameObject.SetActive(true);
     }
 }

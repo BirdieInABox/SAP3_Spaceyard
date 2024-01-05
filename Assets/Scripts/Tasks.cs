@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 /*
 public struct TaskData
@@ -24,6 +25,14 @@ public class Tasks : MonoBehaviour
 {
     [SerializeField]
     public TaskData[] tasks;
+
+    private void Awake()
+    {
+        /* var taskdata[] = new TaskData[tasks.Length];
+ 
+         taskdata.Sort((a, b) => a.taskID.CompareTo(b.taskID));
+         Debug.Log(taskdata);*/
+    }
 
     public int NumOfTasks()
     {

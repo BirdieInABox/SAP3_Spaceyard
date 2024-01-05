@@ -137,6 +137,7 @@ public class Clock : MonoBehaviour
             currMinimum = earlyDayStartDegrees;
 
         //reset bools and timer%
+        //FIXME: RESET JOURNAL
         timeLeft = dayDuration;
         isDay = true;
         startLateDay = false;
