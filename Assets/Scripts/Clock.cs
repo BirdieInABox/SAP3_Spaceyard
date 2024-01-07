@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //A script to control the sol cycle
 public class Clock : MonoBehaviour
@@ -53,6 +54,7 @@ public class Clock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(this.transform.root);
         percentile = ((float)maximum - (float)minimum) / dayDuration;
         earlyDayStartDegrees = (int)(minimum - (earlyDayStart * dayDuration * percentile));
         lateDayStartDegrees = (int)(minimum - (lateDayStart * dayDuration * percentile));
@@ -130,6 +132,8 @@ public class Clock : MonoBehaviour
     //start new day
     public void StartDay()
     {
+        //FIXME: Reload scene
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         //if player is gonna oversleep, change day start to late day start
         if (startLateDay)
             currMinimum = lateDayStartDegrees;

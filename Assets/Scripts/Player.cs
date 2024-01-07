@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
 
     public Animator anims;
 
+    [SerializeField]
+    private GameObject backpack;
+
     //[SerializeField]
     private NPC interactNPC;
     private bool inDialogue = false;
@@ -36,9 +39,10 @@ public class Player : MonoBehaviour
         rb.useGravity = false;
         rotation.y = transform.eulerAngles.y;
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         anims = this.GetComponent<Animator>();
+        Cursor.lockState = CursorLockMode.Locked;
+
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -99,5 +103,16 @@ public class Player : MonoBehaviour
             interactObject = null;
         else if (other.gameObject.tag == "NPC")
             interactNPC = null;
+    }
+
+    public void OnInventory(InputValue value)
+    {
+        backpack.SetActive(!backpack.activeSelf);
+        if (Cursor.lockState == CursorLockMode.Locked)
+            Cursor.lockState = CursorLockMode.None;
+        else
+            Cursor.lockState = CursorLockMode.Locked;
+
+        Cursor.visible = !Cursor.visible;
     }
 }

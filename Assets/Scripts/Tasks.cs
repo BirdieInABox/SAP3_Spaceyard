@@ -28,10 +28,9 @@ public class Tasks : MonoBehaviour
 
     private void Awake()
     {
-        /* var taskdata[] = new TaskData[tasks.Length];
- 
-         taskdata.Sort((a, b) => a.taskID.CompareTo(b.taskID));
-         Debug.Log(taskdata);*/
+        var taskdata = new List<TaskData>(tasks);
+        taskdata.Sort((a, b) => a.taskID.CompareTo(b.taskID));
+        tasks = taskdata.ToArray();
     }
 
     public int NumOfTasks()

@@ -25,11 +25,38 @@ public class InteractableObject : MonoBehaviour
     private bool isDone = false;
 
     // Start is called before the first frame update
+    public int GetID()
+    {
+        int id = 99;
+        switch (objectType)
+        {
+            case ObjectType.Grave:
+                //Check for item
+                id = tasks.GetTaskID((int)ObjectType.Grave);
+                break;
+            case ObjectType.Grass:
+                //Check for item
+                id = tasks.GetTaskID((int)ObjectType.Grass);
+                break;
+            case ObjectType.Candle:
+                //Check for item
+                id = tasks.GetTaskID((int)ObjectType.Candle);
+                break;
+            case ObjectType.Flowerbed:
+                //Check for item
+                id = tasks.GetTaskID((int)ObjectType.Flowerbed);
+                break;
+            default:
+                break;
+        }
+        return id;
+    }
 
     public void Interaction(Player player)
     {
         if (!isDone)
-        { //Check for item
+        {
+            Debug.Log("I am an Interaction!");
             switch (objectType)
             {
                 case ObjectType.Grave:
@@ -52,8 +79,6 @@ public class InteractableObject : MonoBehaviour
                     player.anims.SetTrigger("Interact");
                     break;
             }
-
-            Debug.Log("I am an Interaction!");
         }
     }
 
@@ -70,7 +95,7 @@ public class InteractableObject : MonoBehaviour
         isDone = true;
         //FIXME: Replace this model with the cleared model
 
-    
+
 
         this.gameObject.SetActive(false);
     }

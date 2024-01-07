@@ -26,7 +26,6 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private bool taskAccepted = false;
     private int affection = 0;
-
     private int todaysTask = 0;
 
     [SerializeField]
@@ -49,7 +48,13 @@ public class NPC : MonoBehaviour
         ResetTasks();
     }
 
-    private void StartTask(int index) { }
+    private void StartTask(int index)
+    {
+        var objectiveList = new List<InteractableObject>(objectives);
+        objectiveList.Sort((a, b) => a.GetID().CompareTo(b.GetID()));
+        objectives = objectiveList.ToArray();
+        objectives[index].gameObject.SetActive(true);
+    }
 
     private void ChooseDialogue()
     {
