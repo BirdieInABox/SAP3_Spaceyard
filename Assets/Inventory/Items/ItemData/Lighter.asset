@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80a873d6f2de32f4cb99f19b1d2d4f00, type: 3}
-  m_Name: Red_Flower
+  m_Name: Lighter
   m_EditorClassIdentifier: 
-  displayName: Red Flower
-  itemID: 1
-  icon: {fileID: 21300000, guid: b0b1644ef088a5546833bc79034d4fd7, type: 3}
-  prefab: {fileID: 5889009682319162852, guid: dcb0cbb34d7c30e4cb0d754250fe46d1, type: 3}
+  displayName: Lighter
+  itemID: 4
+  icon: {fileID: 0}
+  description: 
+  prefab: {fileID: 0}

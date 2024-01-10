@@ -21,6 +21,9 @@ public class InteractableObject : MonoBehaviour
     private ObjectType objectType;
 
     [SerializeField]
+    private ItemData neededItem;
+
+    [SerializeField]
     private NPC questGiver;
     private bool isDone = false;
 
@@ -31,19 +34,15 @@ public class InteractableObject : MonoBehaviour
         switch (objectType)
         {
             case ObjectType.Grave:
-                //Check for item
                 id = tasks.GetTaskID((int)ObjectType.Grave);
                 break;
             case ObjectType.Grass:
-                //Check for item
                 id = tasks.GetTaskID((int)ObjectType.Grass);
                 break;
             case ObjectType.Candle:
-                //Check for item
                 id = tasks.GetTaskID((int)ObjectType.Candle);
                 break;
             case ObjectType.Flowerbed:
-                //Check for item
                 id = tasks.GetTaskID((int)ObjectType.Flowerbed);
                 break;
             default:
@@ -56,24 +55,52 @@ public class InteractableObject : MonoBehaviour
     {
         if (!isDone)
         {
+            int index;
             Debug.Log("I am an Interaction!");
             switch (objectType)
             {
                 case ObjectType.Grave:
-                    //Check for item
-                    HandleTask(player, tasks.GetTaskID((int)ObjectType.Grave));
+                    index = (int)ObjectType.Grave;
+                    if (player.inventory.HasItem(tasks.GetNeededItem(index)))
+                        HandleTask(player, tasks.GetTaskID(index));
+                    else
+                    {
+                        //FIXME: Do something when item not in inventory
+                        Debug.Log("Need Item: " + tasks.GetNeededItem(index).displayName);
+                    }
                     break;
                 case ObjectType.Grass:
                     //Check for item
-                    HandleTask(player, tasks.GetTaskID((int)ObjectType.Grass));
+                    index = (int)ObjectType.Grass;
+                    if (player.inventory.HasItem(tasks.GetNeededItem(index)))
+                        HandleTask(player, tasks.GetTaskID(index));
+                    else
+                    {
+                        //FIXME: Do something when item not in inventory
+                        Debug.Log("Need Item: " + tasks.GetNeededItem(index).displayName);
+                    }
                     break;
                 case ObjectType.Candle:
                     //Check for item
-                    HandleTask(player, tasks.GetTaskID((int)ObjectType.Candle));
+                    index = (int)ObjectType.Candle;
+                    if (player.inventory.HasItem(tasks.GetNeededItem(index)))
+                        HandleTask(player, tasks.GetTaskID(index));
+                    else
+                    {
+                        //FIXME: Do something when item not in inventory
+                        Debug.Log("Need Item: " + tasks.GetNeededItem(index).displayName);
+                    }
                     break;
                 case ObjectType.Flowerbed:
                     //Check for item
-                    HandleTask(player, tasks.GetTaskID((int)ObjectType.Flowerbed));
+                    index = (int)ObjectType.Flowerbed;
+                    if (player.inventory.HasItem(tasks.GetNeededItem(index)))
+                        HandleTask(player, index);
+                    else
+                    {
+                        //FIXME: Do something when item not in inventory
+                        Debug.Log("Need Item: " + tasks.GetNeededItem(index).displayName);
+                    }
                     break;
                 default:
                     player.anims.SetTrigger("Interact");
@@ -87,6 +114,7 @@ public class InteractableObject : MonoBehaviour
         player.anims.SetFloat("TaskID", taskID);
         player.anims.SetTrigger("DoTask");
         questGiver.FinishTask();
+        player.ResetInteractable();
         FinishTask();
     }
 

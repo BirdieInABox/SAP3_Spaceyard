@@ -15,3 +15,4 @@ MonoBehaviour:
   taskName: Light Candle
   taskID: 4
   prefab: {fileID: 0}
+  neededItem: {fileID: 11400000, guid: 32a4c9f64ed0eed41b3f4cb19870f3b0, type: 2}

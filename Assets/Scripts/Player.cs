@@ -13,11 +13,13 @@ public class Player : MonoBehaviour
     private Vector2 direction;
     private BoxCollider touchSensor;
     private GameObject interactObject;
+    private PickupItem pickupObject;
 
     public Animator anims;
 
     [SerializeField]
     private GameObject backpack;
+    public Inventory inventory;
 
     //[SerializeField]
     private NPC interactNPC;
@@ -25,10 +27,12 @@ public class Player : MonoBehaviour
 
     public void toggleDialogue()
     {
-        if (inDialogue)
-            inDialogue = false;
-        else
-            inDialogue = true;
+        inDialogue = !inDialogue;
+    }
+
+    public void ResetInteractable()
+    {
+        interactObject = null;
     }
 
     void Awake()
@@ -85,8 +89,13 @@ public class Player : MonoBehaviour
                 interactNPC.InteractionContinue();
             }
         }
-        else if (interactObject != null)
-            interactObject.GetComponent<InteractableObject>().Interaction(this);
+        else if (pickupObject != null)
+        {
+            inventory.AddItem(pickupObject.data, 1);
+            pickupObject.OnPickup();
+        }
+        /*else if (interactObject != null)
+            interactObject.GetComponent<InteractableObject>().Interaction(this);*/
     }
 
     void OnTriggerEnter(Collider other)
@@ -95,6 +104,8 @@ public class Player : MonoBehaviour
             interactObject = other.gameObject;
         else if (other.gameObject.tag == "NPC")
             interactNPC = other.gameObject.GetComponent<NPC>();
+        else if (other.gameObject.tag == "Pickup")
+            pickupObject = other.gameObject.GetComponent<PickupItem>();
     }
 
     void OnTriggerExit(Collider other)
@@ -103,6 +114,8 @@ public class Player : MonoBehaviour
             interactObject = null;
         else if (other.gameObject.tag == "NPC")
             interactNPC = null;
+        else if (other.gameObject.tag == "Pickup")
+            pickupObject = null;
     }
 
     public void OnInventory(InputValue value)

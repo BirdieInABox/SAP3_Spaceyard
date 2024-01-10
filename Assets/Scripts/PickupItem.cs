@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class PickupItem : MonoBehaviour
 {
-    [SerializeField] private InventorySystem invSys;
-    public ItemData referenceData;
+    public ItemData data;
 
     public void OnPickup()
     {
-        invSys.AddItem(referenceData);
         Destroy(gameObject);
     }
-
 }

@@ -15,3 +15,4 @@ MonoBehaviour:
   taskName: Clean Headstone
   taskID: 2
   prefab: {fileID: 3089470820216156928, guid: 6834e01d0bc94864db3b953980bc8b70, type: 3}
+  neededItem: {fileID: 11400000, guid: de9956bd0c6d8ca4283d53eb90008c83, type: 2}

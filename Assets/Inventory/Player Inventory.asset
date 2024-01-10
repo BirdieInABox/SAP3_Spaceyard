@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f0544fbe7e371c4896322d455fd58fb, type: 3}
-  m_Name: Inventory
+  m_Script: {fileID: 11500000, guid: fc86e16d65894f94facb33e461a914f6, type: 3}
+  m_Name: Player Inventory
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: ae72b940dc935324ba26ef7e1f19a498, type: 2}
+  Container: []
+  hotBarSlots: 10

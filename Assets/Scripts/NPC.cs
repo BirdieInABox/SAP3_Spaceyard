@@ -118,7 +118,7 @@ public class NPC : MonoBehaviour
     private void RandomizeTask()
     {
         System.Random random = new System.Random();
-        int taskIndex = random.Next(0, tasks.NumOfTasks() - 1);
+        int taskIndex = 3; //random.Next(0, (tasks.NumOfTasks()));
         todaysTask = tasks.GetTaskID(taskIndex);
         StartTask(taskIndex);
     }

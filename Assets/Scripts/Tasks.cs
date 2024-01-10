@@ -48,6 +48,11 @@ public class Tasks : MonoBehaviour
         return tasks[index].taskID;
     }
 
+    public ItemData GetNeededItem(int index)
+    {
+        return tasks[index].neededItem;
+    }
+
     public TaskData[] GetTaskList()
     {
         return tasks;

@@ -8,5 +8,9 @@ public class ItemData : ScriptableObject
     public string displayName;
     public int itemID;
     public Sprite icon;
-    public GameObject prefab;
+
+    [TextArea(15, 20)]
+    public string description;
+    public GameObject pickupPrefab,
+        inventoryPrefab;
 }

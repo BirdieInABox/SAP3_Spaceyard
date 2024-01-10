@@ -12,41 +12,25 @@ public class InventoryItem
         IInitializePotentialDragHandler,
         IDropHandler
 {
+    /*public enum GlobalEvent
+    {
+        
+    }*/
     public Transform parentAfterDrag { get; set; }
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
 
     [SerializeField]
+    private Transform parent;
+
+    [SerializeField]
     private Canvas uiCanvas;
-
-    public ItemData data { get; private set; }
-    public int stackSize { get; private set; }
-
-    public InventoryItem(ItemData source)
-    {
-        data = source;
-        IncreaseStack();
-    }
-
-    public ItemData GetData()
-    {
-        return data;
-    }
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        //FIXME:  Messenger.Brodacast<Transform>("ItemPickedUp", rectTransform);
         canvasGroup = GetComponent<CanvasGroup>();
-    }
-
-    public void IncreaseStack()
-    {
-        stackSize++;
-    }
-
-    public void DecreaseStack()
-    {
-        stackSize--;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -81,3 +65,15 @@ public class InventoryItem
 
     public void OnDrop(PointerEventData eventData) { }
 }
+
+
+/*
+[CreateAssetMenu(fileName = "InventoryItem", menuName = "Inventory/Items", order = 0)]
+public class InventoryItem : ScriptableObject
+{
+    public ItemData data;
+
+    [TextArea(15, 20)]
+    public string description;
+}
+*/
