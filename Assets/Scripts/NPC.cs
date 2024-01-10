@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
+    private EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
+
     [SerializeField]
     private static int dialogueID,
         lineID;
@@ -20,10 +22,8 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private Dialogue dialogueSystem;
 
-    [SerializeField]
     private bool taskDone = false;
 
-    [SerializeField]
     private bool taskAccepted = false;
     private int affection = 0;
     private int todaysTask = 0;
@@ -34,6 +34,14 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private InteractableObject[] objectives;
 
+    [SerializeField]
+    private bool isDiurnal;
+
+    private void Update()
+    {
+        // globalEventManager.AddListener<bool>(GlobalEvent.StartDay, OnReset(isDay));
+    }
+
     public void ResetTasks()
     {
         taskAccepted = false;
@@ -41,11 +49,12 @@ public class NPC : MonoBehaviour
         RandomizeTask();
     }
 
-    void Awake()
+    private void OnReset(bool isDay)
     {
         float transparencyOnStart = 0f;
         ChangeTransparency(transparencyOnStart);
-        ResetTasks();
+        if (isDiurnal == isDay)
+            ResetTasks();
     }
 
     private void StartTask(int index)

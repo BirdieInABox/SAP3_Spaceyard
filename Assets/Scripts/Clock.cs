@@ -6,8 +6,17 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 //A script to control the sol cycle
+public enum GlobalEvent
+{
+    StartDay = 0,
+    StartNight = 1,
+    ItemCreated = 2
+}
+
 public class Clock : MonoBehaviour
 {
+    private EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
+
     [SerializeField] //The end of the rotation in the circle
     private int maximum = 360;
 
@@ -50,6 +59,7 @@ public class Clock : MonoBehaviour
     private bool isDay = true; //Is it currently day?
     private bool startNight = true; //Is it between any dayStart and earlyDayEnd?
     private bool startLateDay = false; //Does the day or night end without the player ending it manually?
+    public Quaternion rotation;
 
     // Start is called before the first frame update
     void Start()
@@ -127,6 +137,7 @@ public class Clock : MonoBehaviour
         currMinimum = nightStartDegrees;
         //Reset timer%
         timeLeft = dayDuration;
+        globalEventManager.Broadcast<bool>(GlobalEvent.StartNight, isDay);
     }
 
     //start new day
@@ -146,5 +157,6 @@ public class Clock : MonoBehaviour
         isDay = true;
         startLateDay = false;
         startNight = true;
+        globalEventManager.Broadcast<bool>(GlobalEvent.StartDay, isDay);
     }
 }

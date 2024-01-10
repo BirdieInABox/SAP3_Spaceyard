@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d84510150a91034a964b3d4936a3aea, type: 3}
+  m_Name: Clock
+  m_EditorClassIdentifier: 
+  maximum: 360
+  minimum: 0
+  earlyDayStart: 0.33333334
+  lateDayStart: 0.5
+  earlyDayEnd: 0.75
+  lateDayEnd: 0.9583333
+  nightStart: 0.9583333
+  nightEnd: 0.125
+  timeLeft: 0
+  dayDuration: 600
+  rotation: {x: 0, y: 0, z: 0, w: 0}
