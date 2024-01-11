@@ -39,7 +39,7 @@ public class NPC : MonoBehaviour
 
     private void Update()
     {
-        // globalEventManager.AddListener<bool>(GlobalEvent.StartDay, OnReset(isDay));
+        globalEventManager.AddListener<bool>(GlobalEvent.StartDay, OnReset(isDay));
     }
 
     public void ResetTasks()
