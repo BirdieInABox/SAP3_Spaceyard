@@ -6,12 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 //A script to control the sol cycle
-public enum GlobalEvent
-{
-    StartDay = 0,
-    StartNight = 1,
-    ItemCreated = 2
-}
+
 
 public class Clock : MonoBehaviour
 {
@@ -137,7 +132,7 @@ public class Clock : MonoBehaviour
         currMinimum = nightStartDegrees;
         //Reset timer%
         timeLeft = dayDuration;
-        globalEventManager.Broadcast<bool>(GlobalEvent.StartNight, isDay);
+        globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 
     //start new day
@@ -157,6 +152,8 @@ public class Clock : MonoBehaviour
         isDay = true;
         startLateDay = false;
         startNight = true;
-        globalEventManager.Broadcast<bool>(GlobalEvent.StartDay, isDay);
+        EventManagerRepository.Instance
+            .GetSingleInstanceEventManager<GlobalEvent>()
+            .Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 }
