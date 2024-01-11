@@ -1,10 +1,11 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    private EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
+    public EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
 
     [SerializeField]
     private static int dialogueID,
@@ -37,9 +38,21 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private bool isDiurnal;
 
-    private void Update()
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+
+
+    private void Start()
     {
-        globalEventManager.AddListener<bool>(GlobalEvent.StartDay, OnReset(isDay));
+        globalEventManager.AddListener<bool>(GlobalEvent.StartTime, OnReset);
+    }
+
+    private void OnDayStart()
+    {
+        bool _isDay = true;
+        OnReset(_isDay);
     }
 
     public void ResetTasks()
@@ -49,8 +62,9 @@ public class NPC : MonoBehaviour
         RandomizeTask();
     }
 
-    private void OnReset(bool isDay)
+    public void OnReset(bool isDay)
     {
+        Debug.Log("HELLO!");
         float transparencyOnStart = 0f;
         ChangeTransparency(transparencyOnStart);
         if (isDiurnal == isDay)
