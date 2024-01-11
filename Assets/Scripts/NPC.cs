@@ -64,7 +64,7 @@ public class NPC : MonoBehaviour
 
     public void OnReset(bool isDay)
     {
-        Debug.Log("HELLO!");
+        Debug.Log("Good Morning!");
         float transparencyOnStart = 0f;
         ChangeTransparency(transparencyOnStart);
         if (isDiurnal == isDay)

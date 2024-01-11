@@ -152,6 +152,8 @@ public class Clock : MonoBehaviour
         isDay = true;
         startLateDay = false;
         startNight = true;
-        globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
+        EventManagerRepository.Instance
+            .GetSingleInstanceEventManager<GlobalEvent>()
+            .Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 }
