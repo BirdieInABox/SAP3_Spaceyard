@@ -16,6 +16,8 @@ public class InventoryItem
     {
         
     }*/
+    [SerializeField]
+    private ItemData data;
     public Transform parentAfterDrag { get; set; }
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
@@ -29,8 +31,13 @@ public class InventoryItem
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        //FIXME:  Messenger.Brodacast<Transform>("ItemPickedUp", rectTransform);
+        //FIXME: Messenger.Brodacast<Transform>("ItemPickedUp", rectTransform);
         canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    public ItemData GetData()
+    {
+        return data;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -44,8 +51,8 @@ public class InventoryItem
     public void OnDrag(PointerEventData eventData)
     {
         //FIXME: figure out scaling for dragging the item
-        rectTransform.anchoredPosition += eventData.delta;
-        // transform.Translate(eventData.delta * uiCanvas.transform.localScale);
+        transform.position = eventData.position;
+        //transform.Translate(eventData.position * uiCanvas.transform.localScale);
         // (eventData.delta * uiCanvas.transform.localScale);
         //Debug.Log(eventData.delta * uiCanvas.transform.localScale);
     }
@@ -55,7 +62,7 @@ public class InventoryItem
         transform.SetParent(parentAfterDrag);
         canvasGroup.blocksRaycasts = true;
 
-        rectTransform.anchoredPosition = new Vector3(0, 0, 0);
+        rectTransform.localPosition = new Vector3(0, 0, 0);
     }
 
     public void OnInitializePotentialDrag(PointerEventData eventData)

@@ -40,13 +40,18 @@ public class NPC : MonoBehaviour
     [SerializeField] //Should the NPC appear at day or at night?
     private bool isDiurnal;
 
+    [SerializeField]
+    private Clock clock;
+
     //Is it currently day?
+
     private bool isDay;
 
     private void Start()
     { //Add a listener that triggers OnReset() on StartTime being broadcasted
-        globalEventManager.MarkEventAsPersistent(GlobalEvent.StartTime);
-        globalEventManager.AddListener<bool>(GlobalEvent.StartTime, OnReset);
+        /* globalEventManager.MarkEventAsPersistent(GlobalEvent.StartTime);
+         globalEventManager.AddListener<bool>(GlobalEvent.StartTime, OnReset);
+ */
 
         SortTasks();
     }
@@ -60,13 +65,12 @@ public class NPC : MonoBehaviour
     }
 
     //Called when day/night starts
-    public void OnReset(bool _isDay)
+    public void OnReset()
     {
-        isDay = _isDay;
         Debug.Log("Good Morning!"); //TODO: Remove me
         float transparencyOnStart = 1f; //FIXME: Fix transparency
         ChangeTransparency(transparencyOnStart);
-        if (isDiurnal == _isDay) //if nocturnal && is night OR diurnal && is day
+        if (isDiurnal == clock.isDay) //if nocturnal && is night OR diurnal && is day
             ResetTasks();
     }
 
@@ -110,7 +114,7 @@ public class NPC : MonoBehaviour
     //If player gets close, become visible
     private void OnTriggerEnter(Collider other)
     {
-        if ((other.gameObject.tag == "Player") && isDiurnal == isDay)
+        if ((other.gameObject.tag == "Player") && isDiurnal == clock.isDay)
         {
             float transparencyOnAppearance = 1f;
             ChangeTransparency(transparencyOnAppearance);
@@ -133,7 +137,7 @@ public class NPC : MonoBehaviour
     {
         var col = this.gameObject.GetComponent<Renderer>().material.color;
         col.a = transparency;
-       // gameObject.SetActive(transparency == 1);
+        // gameObject.SetActive(transparency == 1);
     }
 
     //Dialogue gets started

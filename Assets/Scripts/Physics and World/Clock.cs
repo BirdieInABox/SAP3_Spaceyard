@@ -51,7 +51,7 @@ public class Clock : MonoBehaviour
 
     [SerializeField] //The duration of a cycle
     private float dayDuration = 600.0f;
-    private bool isDay = true; //Is it currently day?
+    public bool isDay = true; //Is it currently day?
     private bool startNight = true; //Is it between any dayStart and earlyDayEnd?
     private bool startLateDay = false; //Does the day or night end without the player ending it manually?
     public Quaternion rotation;
@@ -151,6 +151,6 @@ public class Clock : MonoBehaviour
         isDay = true;
         startLateDay = false;
         startNight = true;
-        globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
+       // globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 }

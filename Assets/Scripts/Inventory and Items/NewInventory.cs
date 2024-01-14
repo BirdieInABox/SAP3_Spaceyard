@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Inventory", menuName = "Inventory/Inventory", order = 0)]
-public class Inventory : ScriptableObject
+public class NewInventory : MonoBehaviour
 {
     public List<InvSlot> Container = new List<InvSlot>();
 
     [SerializeField]
-    private int hotBarSlots;
+    private Hotbar hotbar;
+
+    private int hotbarSlots;
+
+    private void Start()
+    {
+        hotbarSlots = hotbar.transform.childCount;
+    }
 
     public void AddItem(ItemData _item, int _amount)
     {
@@ -24,10 +30,15 @@ public class Inventory : ScriptableObject
         }
         if (!hasItem)
         {
-            if (Container.Count < hotBarSlots)
+            if (Container.Count < hotbarSlots)
             {
                 Container.Add(new InvSlot(_item, _amount));
-                Instantiate(_item.inventoryPrefab, Vector3.zero, Quaternion.identity);
+                Instantiate(
+                    _item.inventoryPrefab,
+                    Vector3.zero,
+                    Quaternion.identity,
+                    hotbar.transform
+                );
             }
             else
             { //FIXME: What happens when max slots arrived? Add inventory?}
@@ -38,16 +49,16 @@ public class Inventory : ScriptableObject
     public bool HasItem(ItemData _item)
     {
         bool hasItem = false;
-        for (int i = 0; i < Container.Count; i++)
+        for (int i = 0; i < hotbar.slots.Count; i++)
         {
-            hasItem = Container[i].item == _item;
+            hasItem = hotbar.slots[i].GetChild(0).GetComponent<InventoryItem>().GetData() == _item;
             if (hasItem)
                 break;
         }
         return hasItem;
     }
 }
-/*
+
 [System.Serializable]
 public class InvSlot
 {
@@ -64,4 +75,4 @@ public class InvSlot
     {
         amount += value;
     }
-}*/
+}

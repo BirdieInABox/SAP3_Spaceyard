@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private GameObject backpack;
-    public Inventory inventory;
+    public NewInventory inventory;
 
     //[SerializeField]
     private NPC interactNPC;
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
 
     public void OnInventory(InputValue value)
     {
-        backpack.SetActive(!backpack.activeSelf);
+        // backpack.SetActive(!backpack.activeSelf);
         if (Cursor.lockState == CursorLockMode.Locked)
             Cursor.lockState = CursorLockMode.None;
         else
