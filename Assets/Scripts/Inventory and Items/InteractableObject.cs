@@ -25,6 +25,9 @@ public class InteractableObject : MonoBehaviour
 
     [SerializeField]
     private NPC questGiver;
+
+    [SerializeField]
+    private MainQuest mainQuest;
     private bool isDone = false;
 
     // Start is called before the first frame update
@@ -56,7 +59,6 @@ public class InteractableObject : MonoBehaviour
         if (!isDone)
         {
             int index;
-            Debug.Log("I am an Interaction!");
             switch (objectType)
             {
                 case ObjectType.Grave:
@@ -113,7 +115,10 @@ public class InteractableObject : MonoBehaviour
     {
         player.anims.SetFloat("TaskID", taskID);
         player.anims.SetTrigger("DoTask");
-        questGiver.FinishTask();
+        if (questGiver != null)
+            questGiver.FinishTask();
+        else if (mainQuest != null)
+            mainQuest.CandleLit();
         player.ResetInteractable();
         FinishTask();
     }

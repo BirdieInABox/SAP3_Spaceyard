@@ -64,7 +64,7 @@ public class NPC : MonoBehaviour
     {
         isDay = _isDay;
         Debug.Log("Good Morning!"); //TODO: Remove me
-        float transparencyOnStart = 0f; //FIXME: Fix transparency
+        float transparencyOnStart = 1f; //FIXME: Fix transparency
         ChangeTransparency(transparencyOnStart);
         if (isDiurnal == _isDay) //if nocturnal && is night OR diurnal && is day
             ResetTasks();
@@ -133,6 +133,7 @@ public class NPC : MonoBehaviour
     {
         var col = this.gameObject.GetComponent<Renderer>().material.color;
         col.a = transparency;
+       // gameObject.SetActive(transparency == 1);
     }
 
     //Dialogue gets started
