@@ -8,10 +8,11 @@ public class EventManagerRepositoryCleaner : MonoBehaviour
     public void Initialize(Action CleanupRepositoryMethod)
     {
         CleanupRepository = CleanupRepositoryMethod;
+        CleanupRepository();
         DontDestroyOnLoad(gameObject);
     }
 
-    void Awake()
+    void Start()
     {
         CleanupRepository();
     }
