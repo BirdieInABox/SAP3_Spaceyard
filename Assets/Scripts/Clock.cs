@@ -59,7 +59,6 @@ public class Clock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this.transform.root);
         percentile = ((float)maximum - (float)minimum) / dayDuration;
         earlyDayStartDegrees = (int)(minimum - (earlyDayStart * dayDuration * percentile));
         lateDayStartDegrees = (int)(minimum - (lateDayStart * dayDuration * percentile));
@@ -152,8 +151,6 @@ public class Clock : MonoBehaviour
         isDay = true;
         startLateDay = false;
         startNight = true;
-        EventManagerRepository.Instance
-            .GetSingleInstanceEventManager<GlobalEvent>()
-            .Broadcast<bool>(GlobalEvent.StartTime, isDay);
+        globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 }

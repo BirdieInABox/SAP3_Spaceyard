@@ -1,3 +1,4 @@
+//Author: Kim Bolender
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -5,14 +6,15 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
+    //EventManager for broadcast messages
     public EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
 
-    [SerializeField]
+    //dialogue IDs
     private static int dialogueID,
         lineID;
-    private string[] lines;
+    private string[] lines; //The NPC's raw dialogue lines
 
-    [System.Serializable]
+    [System.Serializable] //This NPC's dialogues
     public class Dialogues
     {
         public string[] lines = new string[lineID];
@@ -20,41 +22,36 @@ public class NPC : MonoBehaviour
 
     public Dialogues[] dialogues = new Dialogues[dialogueID];
 
-    [SerializeField]
+    [SerializeField] //The dialogue handler
     private Dialogue dialogueSystem;
 
-    private bool taskDone = false;
+    private bool taskDone = false; //Has the player finished today's task?
 
-    private bool taskAccepted = false;
-    private int affection = 0;
-    private int todaysTask = 0;
+    private bool taskAccepted = false; //Has the player talked to the NPC today without having finished today's task?
+    private int affection = 0; //The level of affection reached
+    private int todaysTask = 0; //The ID of today's random task
 
-    [SerializeField]
+    [SerializeField] //The list of tasks each generic NPC can trigger
     private Tasks tasks;
 
-    [SerializeField]
+    [SerializeField] //Which objects are bound to this NPC for its tasks?
     private InteractableObject[] objectives;
 
-    [SerializeField]
+    [SerializeField] //Should the NPC appear at day or at night?
     private bool isDiurnal;
 
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
-
+    //Is it currently day?
+    private bool isDay;
 
     private void Start()
-    {
+    { //Add a listener that triggers OnReset() on StartTime being broadcasted
+        globalEventManager.MarkEventAsPersistent(GlobalEvent.StartTime);
         globalEventManager.AddListener<bool>(GlobalEvent.StartTime, OnReset);
+
+        SortTasks();
     }
 
-    private void OnDayStart()
-    {
-        bool _isDay = true;
-        OnReset(_isDay);
-    }
-
+    //Reset the state of tasks and randomize a new taksID
     public void ResetTasks()
     {
         taskAccepted = false;
@@ -62,15 +59,18 @@ public class NPC : MonoBehaviour
         RandomizeTask();
     }
 
-    public void OnReset(bool isDay)
+    //Called when day/night starts
+    public void OnReset(bool _isDay)
     {
-        Debug.Log("Good Morning!");
-        float transparencyOnStart = 0f;
+        isDay = _isDay;
+        Debug.Log("Good Morning!"); //TODO: Remove me
+        float transparencyOnStart = 0f; //FIXME: Fix transparency
         ChangeTransparency(transparencyOnStart);
-        if (isDiurnal == isDay)
+        if (isDiurnal == _isDay) //if nocturnal && is night OR diurnal && is day
             ResetTasks();
     }
 
+    //Starts a new task with the taskID index
     private void StartTask(int index)
     {
         var objectiveList = new List<InteractableObject>(objectives);
@@ -79,6 +79,10 @@ public class NPC : MonoBehaviour
         objectives[index].gameObject.SetActive(true);
     }
 
+    //Sorts the array of objectives to mirror the array of tasks
+    private void SortTasks() { }
+
+    //Depending on the status of today's task, choose the dialogue that is shown next
     private void ChooseDialogue()
     {
         if (taskDone)
@@ -96,15 +100,17 @@ public class NPC : MonoBehaviour
         }
     }
 
+    //Gets called when player finishes today's task
     public void FinishTask()
     {
         taskDone = true;
         affection++;
     }
 
+    //If player gets close, become visible
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if ((other.gameObject.tag == "Player") && isDiurnal == isDay)
         {
             float transparencyOnAppearance = 1f;
             ChangeTransparency(transparencyOnAppearance);
@@ -121,23 +127,28 @@ public class NPC : MonoBehaviour
     }
 
     //FIXME: Needs material shader that allows transparency
+    //TODO: Set active/inactive
+    //Changes the NPC's transparency
     private void ChangeTransparency(float transparency)
     {
         var col = this.gameObject.GetComponent<Renderer>().material.color;
         col.a = transparency;
     }
 
+    //Dialogue gets started
     public void InteractionStart()
     {
         ChooseDialogue();
         dialogueSystem.DialogueStart(dialogues[dialogueID].lines);
     }
 
+    //Dialogue gets continued
     public void InteractionContinue()
     {
         dialogueSystem.NextLine();
     }
 
+    //randomizes today's taskID
     private void RandomizeTask()
     {
         System.Random random = new System.Random();

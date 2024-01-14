@@ -136,7 +136,7 @@ public class EventManager<TEventType> : EventManager
     {
         int eventID = ConvertEnumToInt(eventName);
 #if LOG_ALL_MESSAGES
-        Debug.Log("GlobalEventManager MarkAsPermanent \t\"" + eventID + "\"");
+        Debug.Log("GlobalEventManager MarkAsPermanent \t\ eventID: "" + eventID + "\"");
 #endif
         //Add the eventID to the hashset of persistent events. Duplicates will be ignored
         //Set hasPersistentEvents to true if the ID isn't a duplicate.
@@ -210,7 +210,9 @@ public class EventManager<TEventType> : EventManager
                 + "}"
         );
 #endif
+
         Delegate tempDel = eventHandlers[eventID];
+
         if (tempDel != null && tempDel.GetType() != listenerBeingAdded.GetType())
         {
             throw new ListenerException(
@@ -276,6 +278,8 @@ public class EventManager<TEventType> : EventManager
         int eventID = ConvertEnumToInt(eventName);
         OnListenerAdding(eventID, handler);
         eventHandlers[eventID] = (Action<T>)eventHandlers[eventID] + handler;
+
+        Debug.Log(eventHandlers[eventID]);
     }
 
     //Two parameters
@@ -401,6 +405,8 @@ public class EventManager<TEventType> : EventManager
 #if REQUIRE_LISTENER
         OnBroadcasting(eventID);
 #endif
+        Debug.Log(eventHandlers[0]);
+
         Delegate tempDel = eventHandlers[eventID];
         //Debug.Log("ID: " + eventID + " HANDLER: " + eventHandlers[eventID]);
 
