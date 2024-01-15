@@ -54,6 +54,7 @@ public class Hotbar : MonoBehaviour
             if (slot.childCount == 1)
             {
                 lastChild.SetParent(slot);
+                lastChild.SetAsFirstSibling();
                 childRT = lastChild.GetComponent<RectTransform>();
                 childRT.offsetMin = new Vector2(0, 0);
                 childRT.offsetMax = new Vector2(1, 1);
