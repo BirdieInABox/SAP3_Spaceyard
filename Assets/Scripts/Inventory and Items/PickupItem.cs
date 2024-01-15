@@ -5,6 +5,7 @@ using UnityEngine;
 public class PickupItem : MonoBehaviour
 {
     public ItemData data;
+    
 
     public void OnPickup()
     {

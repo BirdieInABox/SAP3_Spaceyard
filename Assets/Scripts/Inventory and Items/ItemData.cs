@@ -8,6 +8,9 @@ public class ItemData : ScriptableObject
     public string displayName;
     public int itemID;
     public Sprite icon;
+    public bool isConsumable;
+
+    public bool daySpawning;
 
     [TextArea(15, 20)]
     public string description;

@@ -48,14 +48,54 @@ public class NewInventory : MonoBehaviour
 
     public bool HasItem(ItemData _item)
     {
-        bool hasItem = false;
-        for (int i = 0; i < hotbar.slots.Count; i++)
+        bool _hasItem = false;
+        for (int i = 0; i < Container.Count; i++)
         {
-            hasItem = hotbar.slots[i].GetChild(0).GetComponent<InventoryItem>().GetData() == _item;
-            if (hasItem)
+            _hasItem = Container[i].item == _item;
+            if (_hasItem)
                 break;
         }
-        return hasItem;
+        return _hasItem;
+    }
+
+    private int FindItem(ItemData _item)
+    {
+        int _index = 0;
+        for (int i = 0; i < Container.Count; i++)
+        {
+            if (Container[i].item == _item)
+                ;
+            {
+                _index = i;
+                break;
+            }
+        }
+        return _index;
+    }
+
+    public bool ItemSelected(ItemData _item)
+    {
+        bool _hasItem = false;
+        for (int i = 0; i < hotbar.slots.Count; i++)
+        {
+            _hasItem = hotbar.slots[i].GetChild(0).GetComponent<InventoryItem>().GetData() == _item;
+            if (_hasItem)
+                break;
+        }
+        return _hasItem;
+    }
+
+    public void RemoveItem(ItemData _item)
+    {
+        if (HasItem(_item))
+        {
+            int index = FindItem(_item);
+            Container[index].ReduceAmount(1);
+            if (Container[index].amount <= 0)
+            {
+                Container.RemoveAt(index);
+            }
+        }
     }
 }
 
@@ -74,5 +114,10 @@ public class InvSlot
     public void AddAmount(int value)
     {
         amount += value;
+    }
+
+    public void ReduceAmount(int value)
+    {
+        amount -= value;
     }
 }

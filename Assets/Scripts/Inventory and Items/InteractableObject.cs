@@ -63,8 +63,12 @@ public class InteractableObject : MonoBehaviour
             {
                 case ObjectType.Grave:
                     index = (int)ObjectType.Grave;
-                    if (player.inventory.HasItem(tasks.GetNeededItem(index)))
-                        HandleTask(player, tasks.GetTaskID(index));
+                    if (player.inventory.ItemSelected(tasks.GetNeededItem(index)))
+                    {
+                        if (tasks.GetNeededItem(index).isConsumable)
+                            player.inventory.RemoveItem(tasks.GetNeededItem(index));
+                        HandleTask(player, index);
+                    }
                     else
                     {
                         //FIXME: Do something when item not in inventory
@@ -74,8 +78,12 @@ public class InteractableObject : MonoBehaviour
                 case ObjectType.Grass:
                     //Check for item
                     index = (int)ObjectType.Grass;
-                    if (player.inventory.HasItem(tasks.GetNeededItem(index)))
-                        HandleTask(player, tasks.GetTaskID(index));
+                    if (player.inventory.ItemSelected(tasks.GetNeededItem(index)))
+                    {
+                        if (tasks.GetNeededItem(index).isConsumable)
+                            player.inventory.RemoveItem(tasks.GetNeededItem(index));
+                        HandleTask(player, index);
+                    }
                     else
                     {
                         //FIXME: Do something when item not in inventory
@@ -85,8 +93,12 @@ public class InteractableObject : MonoBehaviour
                 case ObjectType.Candle:
                     //Check for item
                     index = (int)ObjectType.Candle;
-                    if (player.inventory.HasItem(tasks.GetNeededItem(index)))
-                        HandleTask(player, tasks.GetTaskID(index));
+                    if (player.inventory.ItemSelected(tasks.GetNeededItem(index)))
+                    {
+                        if (tasks.GetNeededItem(index).isConsumable)
+                            player.inventory.RemoveItem(tasks.GetNeededItem(index));
+                        HandleTask(player, index);
+                    }
                     else
                     {
                         //FIXME: Do something when item not in inventory
@@ -96,8 +108,12 @@ public class InteractableObject : MonoBehaviour
                 case ObjectType.Flowerbed:
                     //Check for item
                     index = (int)ObjectType.Flowerbed;
-                    if (player.inventory.HasItem(tasks.GetNeededItem(index)))
+                    if (player.inventory.ItemSelected(tasks.GetNeededItem(index)))
+                    {
+                        if (tasks.GetNeededItem(index).isConsumable)
+                            player.inventory.RemoveItem(tasks.GetNeededItem(index));
                         HandleTask(player, index);
+                    }
                     else
                     {
                         //FIXME: Do something when item not in inventory

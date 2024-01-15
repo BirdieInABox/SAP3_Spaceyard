@@ -135,8 +135,8 @@ public class NPC : MonoBehaviour
     //Changes the NPC's transparency
     private void ChangeTransparency(float transparency)
     {
-        var col = this.gameObject.GetComponent<Renderer>().material.color;
-        col.a = transparency;
+        // var col = this.gameObject.GetComponent<Renderer>().material.color;
+        // col.a = transparency;
         // gameObject.SetActive(transparency == 1);
     }
 
