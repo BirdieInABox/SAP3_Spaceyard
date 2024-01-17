@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class Clock : MonoBehaviour
 {
+    //FIXME: MO: Creation of a new EventManager Instance
     private EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
 
     [SerializeField] //The end of the rotation in the circle
@@ -55,10 +56,17 @@ public class Clock : MonoBehaviour
     private bool startNight = true; //Is it between any dayStart and earlyDayEnd?
     private bool startLateDay = false; //Does the day or night end without the player ending it manually?
     public Quaternion rotation;
+    public Vector3 spawnPos;
+    public Quaternion spawnRotation;
+
+    [SerializeField]
+    private Player player;
 
     // Start is called before the first frame update
     void Start()
     {
+        spawnRotation = player.gameObject.transform.rotation;
+        spawnPos = player.gameObject.transform.position;
         //Calculate x/24 into degrees of a circle with 0 being minimum and 24 being maximum, in base config 0=0°, 24=360°
         percentile = ((float)maximum - (float)minimum) / dayDuration;
         earlyDayStartDegrees = (int)(minimum - (earlyDayStart * dayDuration * percentile));
@@ -132,8 +140,11 @@ public class Clock : MonoBehaviour
         currMinimum = nightStartDegrees;
         //Reset timer%
         timeLeft = dayDuration;
-        //FIXME: BROADCAST MESSAGE OF TIME CHANGE
-        //globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
+        player.gameObject.transform.position = spawnPos;
+        player.gameObject.transform.rotation = spawnRotation;
+        
+        //FIXME: MO: Broadcast for the event StartTime
+        globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 
     //start new day
@@ -147,13 +158,16 @@ public class Clock : MonoBehaviour
         else
             currMinimum = earlyDayStartDegrees;
 
+        player.gameObject.transform.position = spawnPos;
+        player.gameObject.transform.rotation = spawnRotation;
+
         //reset bools and timer%
         //TODO: RESET JOURNAL
         timeLeft = dayDuration;
         isDay = true;
         startLateDay = false;
         startNight = true;
-        //FIXME: BROADCAST MESSAGE OF TIME CHANGE
-        // globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
+        //FIXME: MO: Broadcast for the event StartTime
+        globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 }

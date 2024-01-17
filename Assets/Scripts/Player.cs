@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
             else if (interactObject.TryGetComponent<Bed>(out Bed currBed))
             {
                 //Interact with the bed
-                currBed.Interaction(this);
+                currBed.Interaction();
             }
         }
         //If there is an NPC in the touch sensor

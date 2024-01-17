@@ -15,5 +15,8 @@ MonoBehaviour:
   displayName: Sickle
   itemID: 2
   icon: {fileID: 0}
+  isConsumable: 0
+  daySpawning: 0
   description: 
-  prefab: {fileID: 0}
+  pickupPrefab: {fileID: 0}
+  inventoryPrefab: {fileID: 2179537101637361016, guid: 82deb675cd064204db602067ad1d9a71, type: 3}

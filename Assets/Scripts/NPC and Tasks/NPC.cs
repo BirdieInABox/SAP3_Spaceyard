@@ -7,6 +7,7 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
     //EventManager for broadcast messages
+    //FIXME: MO: Creation of a new EventManager Instance
     public EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
 
     //dialogue IDs
@@ -48,12 +49,12 @@ public class NPC : MonoBehaviour
     private bool isDay;
 
     private void Start()
-    { //Add a listener that triggers OnReset() on StartTime being broadcasted
-        /* globalEventManager.MarkEventAsPersistent(GlobalEvent.StartTime);
-         globalEventManager.AddListener<bool>(GlobalEvent.StartTime, OnReset);
- */
+    {
+        globalEventManager.MarkEventAsPersistent(GlobalEvent.StartTime);
+        //FIXME: MO: Add a listener that triggers OnReset() on StartTime being broadcasted
+        globalEventManager.AddListener<bool>(GlobalEvent.StartTime, OnReset);
 
-        OnReset();
+        //OnReset(clock.isDay);
     }
 
     //Reset the state of tasks and randomize a new taksID
@@ -65,12 +66,12 @@ public class NPC : MonoBehaviour
     }
 
     //Called when day/night starts
-    public void OnReset()
+    public void OnReset(bool isDay)
     {
         Debug.Log("Good Morning!"); //TODO: Remove me
         float transparencyOnStart = 1f; //FIXME: Fix transparency
         ChangeTransparency(transparencyOnStart);
-        if (isDiurnal == clock.isDay) //if nocturnal && is night OR diurnal && is day
+        if (isDiurnal == isDay) //if nocturnal && is night OR diurnal && is day
             ResetTasks();
     }
 
@@ -157,7 +158,7 @@ public class NPC : MonoBehaviour
     private void RandomizeTask()
     {
         System.Random random = new System.Random();
-        int taskIndex = 3; //random.Next(0, (tasks.NumOfTasks()));
+        int taskIndex = random.Next(0, (tasks.NumOfTasks() - 1));
         todaysTask = tasks.GetTaskID(taskIndex);
         StartTask(taskIndex);
     }

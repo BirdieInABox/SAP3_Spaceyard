@@ -25,29 +25,18 @@ public class Dialogue : MonoBehaviour
     private int index;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         //Empty the text-field
         textContent.text = string.Empty;
-        //REMOVEME: Debugging:
-        // DialogueStart(null);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Add a button-down event if you do not use the new unity InputSystem and
-        //you do not call "DialogueStart()" and "NextLine()" from another script.
     }
 
     //Start first instance of this dialogue
-    //Malte, remove the parameter (Everything in the "(...)")
     public void DialogueStart(string[] npcDialogue)
     {
         player.toggleDialogue();
         gameObject.SetActive(true);
         textContent.text = string.Empty;
-        //Malte, remove this line
         lines = npcDialogue;
         //Reset index to first text passage
         index = 0;
@@ -86,7 +75,6 @@ public class Dialogue : MonoBehaviour
             }
             else //If the end of the dialogue (last passage) has been reached
             {
-                //Malte, remove this line
                 lines = null;
                 player.toggleDialogue();
                 //Hide the dialogue window

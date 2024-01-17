@@ -15,5 +15,8 @@ MonoBehaviour:
   displayName: Sponge
   itemID: 3
   icon: {fileID: 0}
+  isConsumable: 0
+  daySpawning: 0
   description: 
-  prefab: {fileID: 0}
+  pickupPrefab: {fileID: 0}
+  inventoryPrefab: {fileID: 2179537101637361016, guid: 003a616dbac89e241893f81e750db091, type: 3}

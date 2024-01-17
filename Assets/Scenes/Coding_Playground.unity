@@ -1062,6 +1062,10 @@ PrefabInstance:
       value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 7237992758393763268, guid: af4f61faedf810d4ba2304d5c6a5f708, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1409131049}
+    - target: {fileID: 7237992758393763268, guid: af4f61faedf810d4ba2304d5c6a5f708, type: 3}
       propertyPath: dayDuration
       value: 600
       objectReference: {fileID: 0}
@@ -4023,6 +4027,14 @@ PrefabInstance:
       propertyPath: dialogueSystem
       value: 
       objectReference: {fileID: 282515541}
+    - target: {fileID: 3747557738716493767, guid: 1e12ed7099aceef4f8837ccdc45be138, type: 3}
+      propertyPath: dialogues.Array.data[0].lines.Array.data[0]
+      value: ' Thank you for your help!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747557738716493767, guid: 1e12ed7099aceef4f8837ccdc45be138, type: 3}
+      propertyPath: dialogues.Array.data[0].lines.Array.data[1]
+      value: I am sure I'll have another task tomorrow.
+      objectReference: {fileID: 0}
     - target: {fileID: 3747557738716493770, guid: 1e12ed7099aceef4f8837ccdc45be138, type: 3}
       propertyPath: m_Name
       value: EGGPC

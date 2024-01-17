@@ -28,6 +28,7 @@ public class InventoryItem
 
     private void Awake()
     {
+        gameObject.GetComponent<Image>().sprite = data.icon;
         //Get components
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
