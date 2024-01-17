@@ -57,6 +57,21 @@
  * knowledge of delegates/c# memory management is required to avoid exceptions.
  */
 
+
+/*FIXME: MO:
+ The problem (most likely) is my two scripts Clock.cs and NPC.cs both creating their separate instance of EventManager.
+ Therefore, my Listeners cannot pick up the broadcast, as the Array eventHandlers of this script is filled for NPC.cs but empty for Clock.cs
+ An idea is, that I might have to somehow use the EventManagerRepository.cs, but I do not know how.
+
+ The purpose of the system is for the clock to tell multiple objects when a day ends or starts, allowing certain objects to only spawn at a certain time or to tell the NPCs to reset their tasks.
+ Adding a reference for each of them would end up in a mess of references in the Clock that is prone to single items being forgotten.
+ A broadcast being sent whenever a day/night starts that is then picked up by any item for which that information is relevant is the most elegant solution i could think of.
+ I could however not find a lot of documentation for this system, as it is already quite old and several iterations of it have been taken offline.
+
+ I now have to find a way to only use one instance of EventManager or to somehow use EventManagerRepository for a centralised way to save listeners and send broadcasts in the same instance.
+ I don't quite understand how though, as the documentation I could find doesn't mention this step in any way, as far as I understood.
+*/
+
 #define LOG_ALL_MESSAGES
 #define LOG_ADD_LISTENER
 #define LOG_BROADCAST_MESSAGE
@@ -136,7 +151,7 @@ public class EventManager<TEventType> : EventManager
     {
         int eventID = ConvertEnumToInt(eventName);
 #if LOG_ALL_MESSAGES
-     //   Debug.Log("GlobalEventManager MarkAsPermanent \t\ eventID: " + eventID + "\"");
+        //   Debug.Log("GlobalEventManager MarkAsPermanent \t\ eventID: " + eventID + "\"");
 #endif
         //Add the eventID to the hashset of persistent events. Duplicates will be ignored
         //Set hasPersistentEvents to true if the ID isn't a duplicate.
@@ -273,13 +288,12 @@ public class EventManager<TEventType> : EventManager
     }
 
     //Single parameter
+    //FIXME: MO: The relevant AddListener Method
     public void AddListener<T>(TEventType eventName, Action<T> handler)
     {
         int eventID = ConvertEnumToInt(eventName);
         OnListenerAdding(eventID, handler);
         eventHandlers[eventID] = (Action<T>)eventHandlers[eventID] + handler;
-
-        Debug.Log(eventHandlers[eventID]);
     }
 
     //Two parameters
@@ -390,6 +404,8 @@ public class EventManager<TEventType> : EventManager
     }
 
     //Single parameter
+    //FIXME: MO: The relevant Broadcast Method
+
     public void Broadcast<T>(TEventType eventName, T arg1)
     {
         int eventID = ConvertEnumToInt(eventName);
@@ -405,7 +421,6 @@ public class EventManager<TEventType> : EventManager
 #if REQUIRE_LISTENER
         OnBroadcasting(eventID);
 #endif
-        Debug.Log(eventHandlers[0]);
 
         Delegate tempDel = eventHandlers[eventID];
         //Debug.Log("ID: " + eventID + " HANDLER: " + eventHandlers[eventID]);

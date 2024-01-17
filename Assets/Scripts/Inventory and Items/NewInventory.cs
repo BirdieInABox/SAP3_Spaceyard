@@ -64,7 +64,6 @@ public class NewInventory : MonoBehaviour
         for (int i = 0; i < Container.Count; i++)
         {
             if (Container[i].item == _item)
-                ;
             {
                 _index = i;
                 break;

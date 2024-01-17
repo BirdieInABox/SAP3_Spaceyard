@@ -15,5 +15,8 @@ MonoBehaviour:
   displayName: Lighter
   itemID: 4
   icon: {fileID: 0}
+  isConsumable: 0
+  daySpawning: 0
   description: 
-  prefab: {fileID: 0}
+  pickupPrefab: {fileID: 0}
+  inventoryPrefab: {fileID: 2179537101637361016, guid: e8e95c715fe04be429f897da683c70b9, type: 3}

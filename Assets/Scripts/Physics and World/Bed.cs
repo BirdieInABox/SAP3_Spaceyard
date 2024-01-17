@@ -10,7 +10,7 @@ public class Bed : MonoBehaviour
     private Clock clock;
 
     //Manually end the day when the player interacts with this
-    public void Interaction(Player player)
+    public void Interaction()
     {
         clock.EndDay();
     }

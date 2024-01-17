@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4781926542877633926}
   - component: {fileID: 1227000795961328634}
   m_Layer: 0
-  m_Name: Red Flower
+  m_Name: SicklePickup
   m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,4 +111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0347bc53cf19fb34e906949da8b085ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: ae72b940dc935324ba26ef7e1f19a498, type: 2}
+  data: {fileID: 11400000, guid: 3d615a283d858da47ae8c7bcd5391e3f, type: 2}
