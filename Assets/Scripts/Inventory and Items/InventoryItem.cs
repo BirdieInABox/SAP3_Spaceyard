@@ -1,3 +1,4 @@
+//Author: Kim Bolender
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,29 +13,28 @@ public class InventoryItem
         IInitializePotentialDragHandler,
         IDropHandler
 {
-    /*public enum GlobalEvent
-    {
-        
-    }*/
-    [SerializeField]
+    [SerializeField] //The ItemData associated with this Item
     private ItemData data;
-    public Transform parentAfterDrag { get; set; }
-    private CanvasGroup canvasGroup;
-    private RectTransform rectTransform;
+    public Transform parentAfterDrag { get; set; } //Temp Parent Object
+    private CanvasGroup canvasGroup; //Component responsible for letting through raycasts
+    private RectTransform rectTransform; //The item's transform data
 
-    [SerializeField]
+    //The current parent
     private Transform parent;
 
+    //The canvas the object is first added to
     [SerializeField]
     private Canvas uiCanvas;
 
     private void Awake()
     {
+        //Get components
         rectTransform = GetComponent<RectTransform>();
-        //FIXME: Messenger.Brodacast<Transform>("ItemPickedUp", rectTransform);
         canvasGroup = GetComponent<CanvasGroup>();
+        //FIXME: Messenger.Brodacast<Transform>("ItemPickedUp", rectTransform);
     }
 
+    //Return this item's data
     public ItemData GetData()
     {
         return data;
@@ -42,14 +42,19 @@ public class InventoryItem
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        //Temporarily safe the old parent
         parentAfterDrag = transform.parent;
+        //set parent to the inventory canvas
         transform.SetParent(transform.root.root);
+        //Show this over every other element of the inventory
         transform.SetAsLastSibling();
+        //make this invisible for raycasts
         canvasGroup.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        //FIXME: Keep this at the cursor's position
         //FIXME: figure out scaling for dragging the item
         transform.position = eventData.position;
         //transform.Translate(eventData.position * uiCanvas.transform.localScale);
@@ -59,9 +64,11 @@ public class InventoryItem
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        //reset parent to what it was before, if no new parent has been chosen
         transform.SetParent(parentAfterDrag);
+        //Reactivate raycast
         canvasGroup.blocksRaycasts = true;
-
+        //Reset localPosition
         rectTransform.localPosition = new Vector3(0, 0, 0);
     }
 

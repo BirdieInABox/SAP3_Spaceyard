@@ -1,7 +1,10 @@
+//Author: Kim Bolender
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//SCRIPTABLE OBJECT VERSION OF THE INVENTORY, TODO:POSSIBLY OBSOLETE?
 [CreateAssetMenu(fileName = "Inventory", menuName = "Inventory/Inventory", order = 0)]
 public class Inventory : ScriptableObject
 {

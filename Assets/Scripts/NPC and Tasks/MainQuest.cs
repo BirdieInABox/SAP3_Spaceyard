@@ -1,3 +1,4 @@
+//Auhor: Kim Bolender
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class MainQuest : MonoBehaviour
         public string[] lines = new string[lineID];
     }
 
+    //Separate dialogues for each chapter
     public Dialogues[] dialoguesChapter1 = new Dialogues[dialogueID];
     public Dialogues[] dialoguesChapter2 = new Dialogues[dialogueID];
 
@@ -46,27 +48,30 @@ public class MainQuest : MonoBehaviour
 
     void Start()
     {
+        //restart the number of candles
         candlesLeft = candles.Length;
     }
+
+    //Depending on the status of the main quest, choose the dialogue that is shown next
 
     private void ChooseDialogue()
     {
         switch (chapter)
         {
-            case 1:
+            case 1: //Chapter 1
 
-                if (!taskAccepted)
+                if (!taskAccepted) //First interaction
                 {
                     dialogueID = 0;
                     taskAccepted = true;
                 }
-                else
+                else //Dialogue ID = number of candles lit
                 {
                     dialogueID = (candles.Length + 1) - candlesLeft;
                 }
 
                 break;
-            case 2:
+            case 2: //Chapter 2
                 if (!taskAccepted)
                     Debug.Log("Here the next chapter would be introduced");
                 break;
@@ -75,20 +80,24 @@ public class MainQuest : MonoBehaviour
         }
     }
 
+    //Dialogue gets started
+
+
     public void InteractionStart()
     {
         ChooseDialogue();
         switch (chapter)
         {
-            case 1:
+            case 1: //Chapter 1
                 dialogueSystem.DialogueStart(dialoguesChapter1[dialogueID].lines);
                 if (candlesLeft == 0)
                 {
+                    //When task done, show key
                     ShowKey();
                 }
 
                 break;
-            case 2:
+            case 2: //Chapter 2
                 dialogueSystem.DialogueStart(dialoguesChapter2[dialogueID].lines);
 
                 break;

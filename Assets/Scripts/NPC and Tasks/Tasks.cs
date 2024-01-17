@@ -1,9 +1,10 @@
+//Author: Kim Bolender
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-/*
+/* TODO: Cleanup
 public struct TaskData
 {
     public int neededItemID;
@@ -23,42 +24,48 @@ public class Tasks : Dictionary<int, TaskData>
 */
 public class Tasks : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField] //Array of tasks
     public TaskData[] tasks;
 
     private void Awake()
     {
+        //Sort the array
         var taskdata = new List<TaskData>(tasks);
         taskdata.Sort((a, b) => a.taskID.CompareTo(b.taskID));
         tasks = taskdata.ToArray();
     }
 
+    //Gets size of tasks array
     public int NumOfTasks()
     {
         return tasks.Length;
     }
 
+    //Get task name at Index
     public string GetTaskName(int index)
     {
         return tasks[index].taskName;
     }
 
+    //Get task ID at Index
     public int GetTaskID(int index)
     {
         return tasks[index].taskID;
     }
 
+    //Get needed item at Index
     public ItemData GetNeededItem(int index)
     {
         return tasks[index].neededItem;
     }
 
+    //Get tasks array
     public TaskData[] GetTaskList()
     {
         return tasks;
     }
 }
-/*
+/* TODO: Cleanup
     [SerializeField]
     private InventoryItem[] neededItem;
 

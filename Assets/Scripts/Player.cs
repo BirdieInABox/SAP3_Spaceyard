@@ -1,3 +1,4 @@
+//Author: Kim Bolender
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,100 +7,117 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed = 5f;
+    private float moveSpeed = 5f; //The walking speed
     private Rigidbody rb;
     private Vector2 rotation = Vector2.zero;
-    private float maxVelocityChange = 10f;
-    private Vector2 direction;
-    private BoxCollider touchSensor;
-    private GameObject interactObject;
-    private PickupItem pickupObject;
+    private Vector2 direction; //The direction the player is facing
+    private BoxCollider touchSensor; //A hitbox in front of the player
+    private GameObject interactObject; //An interactable object within the touch sensor
+    private PickupItem pickupObject; //A pickupable object within the touch sensor
+    private NPC interactNPC; //An NPC within the touch sensor
 
-    public Animator anims;
+    public Animator anims; //The player's animation controller
 
-    [SerializeField]
+    [SerializeField] //TODO: Re-implement backpack as inventory expansion, drag & drop needed
     private GameObject backpack;
-    public NewInventory inventory;
+    public NewInventory inventory; //The player's inventory
+    private bool inDialogue = false; //Is the player currently in a dialogue?
 
-    //[SerializeField]
-    private NPC interactNPC;
-    private bool inDialogue = false;
-
-    public void toggleDialogue()
-    {
-        inDialogue = !inDialogue;
-    }
-
-    public void ResetInteractable()
-    {
-        interactObject = null;
-    }
-
+    //When player is created
     void Awake()
     {
+        //Get components and set up RB
         rb = GetComponent<Rigidbody>();
         touchSensor = GetComponent<BoxCollider>();
         rb.freezeRotation = true;
         rb.useGravity = false;
         rotation.y = transform.eulerAngles.y;
-
         anims = this.GetComponent<Animator>();
-        Cursor.lockState = CursorLockMode.Locked;
 
+        //lock and hide curs
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector3(direction.x * moveSpeed, rb.velocity.y, direction.y * moveSpeed);
+        //Only allow movement outside dialogues
+        if (!inDialogue)
+        {
+            //Move
+            rb.velocity = new Vector3(
+                direction.x * moveSpeed,
+                rb.velocity.y,
+                direction.y * moveSpeed
+            );
+            //Rotate
+            gameObject.transform.LookAt(
+                new Vector3(direction.x, 0, direction.y) + gameObject.transform.position
+            );
+        }
+        //Walking animation
         anims.SetBool("Walking", rb.velocity != new Vector3(0, 0, 0));
     }
 
+    //Unity Input System, value carrying a vector2 with the movement direction
     public void OnMove(InputValue value)
     {
         direction = value.Get<Vector2>();
     }
 
+    //Unity Input system
     public void OnInteract(InputValue value)
     {
+        //If there is an interactable object in the touch sensor
         if (interactObject != null)
         {
+            //if the interactable object has the InteractableObject component
             if (
                 interactObject.TryGetComponent<InteractableObject>(
                     out InteractableObject currObject
                 )
             )
             {
+                //Interact with the current object
                 currObject.Interaction(this);
             }
+            //if the interactable object has the Bed component
             else if (interactObject.TryGetComponent<Bed>(out Bed currBed))
             {
+                //Interact with the bed
                 currBed.Interaction(this);
             }
         }
+        //If there is an NPC in the touch sensor
         else if (interactNPC != null)
         {
+            //If the player isn't in a dialogue yet
             if (!inDialogue)
             {
+                //Start a dialogue with the NPC
                 interactNPC.InteractionStart();
             }
-            else
+            else //If he player is in a dialogue
             {
+                //Coninue the dialogue
                 interactNPC.InteractionContinue();
             }
         }
+        //If there is a pickup object in the touch sensor
         else if (pickupObject != null)
         {
+            //Add the picked-up item to the inventory
             inventory.AddItem(pickupObject.data, 1);
+            //Trigger the item's pick-up method
             pickupObject.OnPickup();
         }
-        /*else if (interactObject != null)
-            interactObject.GetComponent<InteractableObject>().Interaction(this);*/
     }
 
+    //Touch sensor
     void OnTriggerEnter(Collider other)
     {
+        //Check of what type the object in the touch sensor is
         if (other.gameObject.tag == "Interactable")
             interactObject = other.gameObject;
         else if (other.gameObject.tag == "NPC")
@@ -108,8 +126,9 @@ public class Player : MonoBehaviour
             pickupObject = other.gameObject.GetComponent<PickupItem>();
     }
 
+    //Touch sensor
     void OnTriggerExit(Collider other)
-    {
+    { //Check of what type the object leaving the touch sensor is
         if (other.gameObject.tag == "Interactable")
             interactObject = null;
         else if (other.gameObject.tag == "NPC")
@@ -118,14 +137,30 @@ public class Player : MonoBehaviour
             pickupObject = null;
     }
 
+    //Opening the inventor
     public void OnInventory(InputValue value)
     {
+        //Open/Close backpack
         // backpack.SetActive(!backpack.activeSelf);
+
+        //Lock/unlock cursor
         if (Cursor.lockState == CursorLockMode.Locked)
             Cursor.lockState = CursorLockMode.None;
         else
             Cursor.lockState = CursorLockMode.Locked;
 
         Cursor.visible = !Cursor.visible;
+    }
+
+    //Allow dialogue to change inDIalogue
+    public void toggleDialogue()
+    {
+        inDialogue = !inDialogue;
+    }
+
+    //If an object disappears out of the touch sensor, reset the variable
+    public void ResetInteractable()
+    {
+        interactObject = null;
     }
 }

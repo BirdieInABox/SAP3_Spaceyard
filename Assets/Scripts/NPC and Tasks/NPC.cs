@@ -53,7 +53,7 @@ public class NPC : MonoBehaviour
          globalEventManager.AddListener<bool>(GlobalEvent.StartTime, OnReset);
  */
 
-        SortTasks();
+        OnReset();
     }
 
     //Reset the state of tasks and randomize a new taksID

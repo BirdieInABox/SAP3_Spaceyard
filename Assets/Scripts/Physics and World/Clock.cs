@@ -59,6 +59,7 @@ public class Clock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Calculate x/24 into degrees of a circle with 0 being minimum and 24 being maximum, in base config 0=0°, 24=360°
         percentile = ((float)maximum - (float)minimum) / dayDuration;
         earlyDayStartDegrees = (int)(minimum - (earlyDayStart * dayDuration * percentile));
         lateDayStartDegrees = (int)(minimum - (lateDayStart * dayDuration * percentile));
@@ -131,13 +132,14 @@ public class Clock : MonoBehaviour
         currMinimum = nightStartDegrees;
         //Reset timer%
         timeLeft = dayDuration;
-        globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
+        //FIXME: BROADCAST MESSAGE OF TIME CHANGE
+        //globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 
     //start new day
     public void StartDay()
     {
-        //FIXME: Reload scene
+        //FIXME: Reload scene?
         // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         //if player is gonna oversleep, change day start to late day start
         if (startLateDay)
@@ -146,11 +148,12 @@ public class Clock : MonoBehaviour
             currMinimum = earlyDayStartDegrees;
 
         //reset bools and timer%
-        //FIXME: RESET JOURNAL
+        //TODO: RESET JOURNAL
         timeLeft = dayDuration;
         isDay = true;
         startLateDay = false;
         startNight = true;
-       // globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
+        //FIXME: BROADCAST MESSAGE OF TIME CHANGE
+        // globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 }
