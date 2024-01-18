@@ -13,7 +13,7 @@ public class Camera : MonoBehaviour
 
     [SerializeField] //The camera's z-offset
     private float cameraDistance = 10f;
-    private Transform cam; 
+    private Transform cam;
 
     public void Start()
     {

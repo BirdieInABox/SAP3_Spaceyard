@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private BoxCollider touchSensor; //A hitbox in front of the player
     private GameObject interactObject; //An interactable object within the touch sensor
     private PickupItem pickupObject; //A pickupable object within the touch sensor
+    private Chest chest; //A chest within the touch sensor
     private NPC interactNPC; //An NPC within the touch sensor
 
     public Animator anims; //The player's animation controller
@@ -112,6 +113,15 @@ public class Player : MonoBehaviour
             //Trigger the item's pick-up method
             pickupObject.OnPickup();
         }
+        else if (chest != null)
+        {
+            chest.Interaction(this);
+        }
+    }
+
+    public void AddItem(ItemData item)
+    {
+        inventory.AddItem(item, 1);
     }
 
     //Touch sensor
@@ -124,6 +134,8 @@ public class Player : MonoBehaviour
             interactNPC = other.gameObject.GetComponent<NPC>();
         else if (other.gameObject.tag == "Pickup")
             pickupObject = other.gameObject.GetComponent<PickupItem>();
+        else if (other.gameObject.tag == "Chest")
+            chest = other.gameObject.GetComponent<Chest>();
     }
 
     //Touch sensor
@@ -135,6 +147,8 @@ public class Player : MonoBehaviour
             interactNPC = null;
         else if (other.gameObject.tag == "Pickup")
             pickupObject = null;
+        else if (other.gameObject.tag == "Chest")
+            chest = null;
     }
 
     //Opening the inventor
