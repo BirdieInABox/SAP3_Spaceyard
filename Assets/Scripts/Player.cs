@@ -67,6 +67,11 @@ public class Player : MonoBehaviour
         direction = value.Get<Vector2>();
     }
 
+    public void OnEscape(InputValue value)
+    {
+        Application.Quit();
+    }
+
     //Unity Input system
     public void OnInteract(InputValue value)
     {
