@@ -142,9 +142,9 @@ public class Clock : MonoBehaviour
         timeLeft = dayDuration;
         player.gameObject.transform.position = spawnPos;
         player.gameObject.transform.rotation = spawnRotation;
-        
+
         //FIXME: MO: Broadcast for the event StartTime
-        globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
+        //  globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 
     //start new day
@@ -168,6 +168,6 @@ public class Clock : MonoBehaviour
         startLateDay = false;
         startNight = true;
         //FIXME: MO: Broadcast for the event StartTime
-        globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
+        //  globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 }
