@@ -50,11 +50,11 @@ public class NPC : MonoBehaviour
 
     private void Start()
     {
-        globalEventManager.MarkEventAsPersistent(GlobalEvent.StartTime);
+        //globalEventManager.MarkEventAsPersistent(GlobalEvent.StartTime);
         //FIXME: MO: Add a listener that triggers OnReset() on StartTime being broadcasted
-        globalEventManager.AddListener<bool>(GlobalEvent.StartTime, OnReset);
+        // globalEventManager.AddListener<bool>(GlobalEvent.StartTime, OnReset);
 
-        //OnReset(clock.isDay);
+        OnReset(clock.isDay);
     }
 
     //Reset the state of tasks and randomize a new taksID
