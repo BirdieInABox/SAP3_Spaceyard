@@ -11,7 +11,10 @@ using UnityEngine.SceneManagement;
 public class Clock : MonoBehaviour
 {
     //FIXME: MO: Creation of a new EventManager Instance
-    private EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
+    // private EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
+
+    [SerializeField]
+    private GameObject[] alarmRecipients;
 
     [SerializeField] //The end of the rotation in the circle
     private int maximum = 360;
@@ -142,7 +145,7 @@ public class Clock : MonoBehaviour
         timeLeft = dayDuration;
         player.gameObject.transform.position = spawnPos;
         player.gameObject.transform.rotation = spawnRotation;
-
+        Alarm();
         //FIXME: MO: Broadcast for the event StartTime
         //  globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
@@ -167,7 +170,24 @@ public class Clock : MonoBehaviour
         isDay = true;
         startLateDay = false;
         startNight = true;
+        Alarm();
         //FIXME: MO: Broadcast for the event StartTime
         //  globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
+    }
+
+    private void Alarm()
+    {
+        foreach (GameObject recipient in alarmRecipients)
+        {
+            if (recipient.TryGetComponent<PickupItem>(out PickupItem currItem))
+            {
+                //Interact with the current object
+                currItem.StartTime(isDay);
+            }
+            else if (recipient.TryGetComponent<NPC>(out NPC currNPC))
+            {
+                currNPC.StartTime(isDay);
+            }
+        }
     }
 }

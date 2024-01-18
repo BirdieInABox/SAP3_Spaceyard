@@ -41,9 +41,6 @@ public class NPC : MonoBehaviour
     [SerializeField] //Should the NPC appear at day or at night?
     private bool isDiurnal;
 
-    [SerializeField]
-    private Clock clock;
-
     //Is it currently day?
 
     private bool isDay;
@@ -53,8 +50,12 @@ public class NPC : MonoBehaviour
         //globalEventManager.MarkEventAsPersistent(GlobalEvent.StartTime);
         //FIXME: MO: Add a listener that triggers OnReset() on StartTime being broadcasted
         // globalEventManager.AddListener<bool>(GlobalEvent.StartTime, OnReset);
+    }
 
-        OnReset(clock.isDay);
+    public void StartTime(bool _isDay)
+    {
+        isDay = _isDay;
+        OnReset();
     }
 
     //Reset the state of tasks and randomize a new taksID
@@ -66,9 +67,9 @@ public class NPC : MonoBehaviour
     }
 
     //Called when day/night starts
-    public void OnReset(bool isDay)
+    public void OnReset()
     {
-        Debug.Log("Good Morning!"); //TODO: Remove me
+        
         float transparencyOnStart = 1f; //FIXME: Fix transparency
         ChangeTransparency(transparencyOnStart);
         if (isDiurnal == isDay) //if nocturnal && is night OR diurnal && is day
@@ -113,22 +114,24 @@ public class NPC : MonoBehaviour
     }
 
     //If player gets close, become visible
-    private void OnTriggerEnter(Collider other)
-    {
-        if ((other.gameObject.tag == "Player") && isDiurnal == clock.isDay)
+    private void OnTriggerEnter(
+        Collider other
+    ) { /*
+        if ((other.gameObject.tag == "Player") && isDiurnal == isDay)
         {
             float transparencyOnAppearance = 1f;
             ChangeTransparency(transparencyOnAppearance);
-        }
+        }*/
     }
 
-    private void OnTriggerExit(Collider other)
-    {
+    private void OnTriggerExit(
+        Collider other
+    ) { /*
         if (other.gameObject.tag == "Player")
         {
             float transparencyOnAppearance = 0f;
             ChangeTransparency(transparencyOnAppearance);
-        }
+        }*/
     }
 
     //FIXME: Needs material shader that allows transparency
@@ -144,8 +147,11 @@ public class NPC : MonoBehaviour
     //Dialogue gets started
     public void InteractionStart()
     {
-        ChooseDialogue();
-        dialogueSystem.DialogueStart(dialogues[dialogueID].lines);
+        if (isDay == isDiurnal)
+        {
+            ChooseDialogue();
+            dialogueSystem.DialogueStart(dialogues[dialogueID].lines);
+        }
     }
 
     //Dialogue gets continued
