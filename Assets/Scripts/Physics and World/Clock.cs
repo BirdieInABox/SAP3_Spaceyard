@@ -65,6 +65,9 @@ public class Clock : MonoBehaviour
     [SerializeField]
     private Player player;
 
+    [SerializeField]
+    private LightChanges lightSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -189,5 +192,6 @@ public class Clock : MonoBehaviour
                 currNPC.StartTime(isDay);
             }
         }
+        lightSource.ChangeColor(isDay);
     }
 }
