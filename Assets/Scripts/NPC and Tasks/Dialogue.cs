@@ -31,6 +31,11 @@ public class Dialogue : MonoBehaviour
         textContent.text = string.Empty;
     }
 
+    public void ChangeSpeed(float speed)
+    {
+        textSpeed = speed;
+    }
+
     //Start first instance of this dialogue
     public void DialogueStart(string[] npcDialogue)
     {

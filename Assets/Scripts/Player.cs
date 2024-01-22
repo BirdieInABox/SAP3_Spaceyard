@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private bool inDialogue = false; //Is the player currently in a dialogue?
 
     //When player is created
-    void Awake()
+    void Start()
     {
         //Get components and set up RB
         rb = GetComponent<Rigidbody>();
@@ -65,11 +65,6 @@ public class Player : MonoBehaviour
     public void OnMove(InputValue value)
     {
         direction = value.Get<Vector2>();
-    }
-
-    public void OnEscape(InputValue value)
-    {
-        Application.Quit();
     }
 
     //Unity Input system
@@ -157,7 +152,7 @@ public class Player : MonoBehaviour
     }
 
     //Opening the inventor
-    public void OnInventory(InputValue value)
+    /*public void OnInventory(InputValue value)
     {
         //Open/Close backpack
         // backpack.SetActive(!backpack.activeSelf);
@@ -169,7 +164,7 @@ public class Player : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
 
         Cursor.visible = !Cursor.visible;
-    }
+    }*/
 
     //Allow dialogue to change inDIalogue
     public void toggleDialogue()

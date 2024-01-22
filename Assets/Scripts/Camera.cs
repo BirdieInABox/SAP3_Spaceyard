@@ -22,6 +22,7 @@ public class Camera : MonoBehaviour
 
     public void Update()
     {
+        Debug.Log(AudioListener.volume);
         //Follow the player
         Vector3 pos = player.position;
         //add offsets
