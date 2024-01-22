@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class MainQuest : MonoBehaviour
 {
-    //EventManager for broadcast messages
-    public EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
-
     //dialogue IDs
     private static int dialogueID,
         lineID;

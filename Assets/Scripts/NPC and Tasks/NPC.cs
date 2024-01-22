@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
-    //EventManager for broadcast messages
-    //FIXME: MO: Creation of a new EventManager Instance
-    public EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
-
     //dialogue IDs
     private static int dialogueID,
         lineID;
@@ -69,7 +65,6 @@ public class NPC : MonoBehaviour
     //Called when day/night starts
     public void OnReset()
     {
-        
         float transparencyOnStart = 1f; //FIXME: Fix transparency
         ChangeTransparency(transparencyOnStart);
         if (isDiurnal == isDay) //if nocturnal && is night OR diurnal && is day
