@@ -113,7 +113,7 @@ MonoBehaviour:
   tasks: {fileID: 0}
   objectType: 3
   neededItem: {fileID: 11400000, guid: ae72b940dc935324ba26ef7e1f19a498, type: 2}
-  questGiver: {fileID: 0}
+  questGiver: {fileID: 7331027470638383044}
   mainQuest: {fileID: 0}
 --- !u!1 &1179408960103437669
 GameObject:
@@ -229,7 +229,7 @@ MonoBehaviour:
   tasks: {fileID: 0}
   objectType: 0
   neededItem: {fileID: 11400000, guid: de9956bd0c6d8ca4283d53eb90008c83, type: 2}
-  questGiver: {fileID: 0}
+  questGiver: {fileID: 7331027470638383044}
   mainQuest: {fileID: 0}
 --- !u!1 &1931063664998630785
 GameObject:
@@ -259,7 +259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1931063664998630785}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5141.714, y: -2739.4792, z: 7370.662}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1.0196886, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -463,7 +463,7 @@ MonoBehaviour:
   tasks: {fileID: 0}
   objectType: 3
   neededItem: {fileID: 11400000, guid: 00f68aed361cf014299cca532b85087a, type: 2}
-  questGiver: {fileID: 0}
+  questGiver: {fileID: 7331027470638383044}
   mainQuest: {fileID: 0}
 --- !u!1 &3607970841511262847
 GameObject:
@@ -578,7 +578,7 @@ MonoBehaviour:
   tasks: {fileID: 0}
   objectType: 1
   neededItem: {fileID: 11400000, guid: 3d615a283d858da47ae8c7bcd5391e3f, type: 2}
-  questGiver: {fileID: 0}
+  questGiver: {fileID: 7331027470638383044}
   mainQuest: {fileID: 0}
 --- !u!1 &4634170489690602490
 GameObject:
@@ -693,7 +693,7 @@ MonoBehaviour:
   tasks: {fileID: 0}
   objectType: 3
   neededItem: {fileID: 11400000, guid: e15fc3f22ea60214288dfe77d05db126, type: 2}
-  questGiver: {fileID: 0}
+  questGiver: {fileID: 7331027470638383044}
   mainQuest: {fileID: 0}
 --- !u!1 &5665882615192029007
 GameObject:
@@ -808,7 +808,7 @@ MonoBehaviour:
   tasks: {fileID: 0}
   objectType: 3
   neededItem: {fileID: 11400000, guid: 67ad0f4d45d8d1b41aa80c7504bc222f, type: 2}
-  questGiver: {fileID: 0}
+  questGiver: {fileID: 7331027470638383044}
   mainQuest: {fileID: 0}
 --- !u!1 &7089445775191587181
 GameObject:
@@ -924,7 +924,7 @@ MonoBehaviour:
   tasks: {fileID: 0}
   objectType: 2
   neededItem: {fileID: 11400000, guid: 32a4c9f64ed0eed41b3f4cb19870f3b0, type: 2}
-  questGiver: {fileID: 0}
+  questGiver: {fileID: 7331027470638383044}
   mainQuest: {fileID: 0}
 --- !u!1 &8565928098315046083
 GameObject:
@@ -972,6 +972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5014cc311212a4caa3d335a1b72fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  journal: {fileID: 0}
   dialogues:
   - lines:
     - Thank you for your help!

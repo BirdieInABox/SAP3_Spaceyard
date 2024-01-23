@@ -36,6 +36,11 @@ public class Dialogue : MonoBehaviour
         textSpeed = speed;
     }
 
+    public float GetSpeed()
+    {
+        return textSpeed;
+    }
+
     //Start first instance of this dialogue
     public void DialogueStart(string[] npcDialogue)
     {
