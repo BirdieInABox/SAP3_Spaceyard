@@ -77,7 +77,9 @@ public class NewInventory : MonoBehaviour
         bool _hasItem = false;
         for (int i = 0; i < hotbar.slots.Count; i++)
         {
-            _hasItem = hotbar.slots[i].GetChild(0).GetComponent<InventoryItem>().GetData() == _item;
+            if (hotbar.slots[i].childCount > 1)
+                _hasItem =
+                    hotbar.slots[i].GetChild(0).GetComponent<InventoryItem>().GetData() == _item;
             if (_hasItem)
                 break;
         }
