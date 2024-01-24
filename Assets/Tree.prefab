@@ -224,9 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37dba3114c92cb4bbc1ad0abe9b03ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 875
-  journalUI: {fileID: 0}
+  moveSpeed: 10
   anims: {fileID: 0}
+  backpack: {fileID: 0}
   inventory: {fileID: 6861349194317651136}
 --- !u!1001 &7062660941339476526
 PrefabInstance:

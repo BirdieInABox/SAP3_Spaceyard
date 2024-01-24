@@ -17,10 +17,10 @@ public class Player : MonoBehaviour
     private Chest chest; //A chest within the touch sensor
     private NPC interactNPC; //An NPC within the touch sensor
 
-    [SerializeField]
-    private GameObject journalUI;
     public Animator anims; //The player's animation controller
 
+    [SerializeField] //TODO: Re-implement backpack as inventory expansion, drag & drop needed
+    private GameObject backpack;
     public NewInventory inventory; //The player's inventory
     private bool inDialogue = false; //Is the player currently in a dialogue?
 
@@ -119,22 +119,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void OnJournal(InputValue value)
-    {
-        journalUI.SetActive(!journalUI.activeSelf);
-        ToggleCursor();
-    }
-
-    private void ToggleCursor()
-    {
-        if (Cursor.lockState == CursorLockMode.Locked)
-            Cursor.lockState = CursorLockMode.None;
-        else
-            Cursor.lockState = CursorLockMode.Locked;
-
-        Cursor.visible = !Cursor.visible;
-    }
-
     public void AddItem(ItemData item)
     {
         inventory.AddItem(item, 1);
@@ -166,6 +150,21 @@ public class Player : MonoBehaviour
         else if (other.gameObject.tag == "Chest")
             chest = null;
     }
+
+    //Opening the inventor
+    /*public void OnInventory(InputValue value)
+    {
+        //Open/Close backpack
+        // backpack.SetActive(!backpack.activeSelf);
+
+        //Lock/unlock cursor
+        if (Cursor.lockState == CursorLockMode.Locked)
+            Cursor.lockState = CursorLockMode.None;
+        else
+            Cursor.lockState = CursorLockMode.Locked;
+
+        Cursor.visible = !Cursor.visible;
+    }*/
 
     //Allow dialogue to change inDIalogue
     public void toggleDialogue()

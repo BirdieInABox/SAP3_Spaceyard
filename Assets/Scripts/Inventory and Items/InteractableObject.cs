@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
+    [SerializeField] //The list of possible tasks
+    private Tasks tasks;
+
     //FIXME: connect this choice to the list of tasks in Tasks.cs
     //The types of items
     private enum ObjectType
@@ -41,25 +44,25 @@ public class InteractableObject : MonoBehaviour
         switch (objectType)
         {
             case ObjectType.Grave:
-                id = questGiver.tasks.GetTaskID((int)ObjectType.Grave);
+                id = tasks.GetTaskID((int)ObjectType.Grave);
                 break;
             case ObjectType.Grass:
-                id = questGiver.tasks.GetTaskID((int)ObjectType.Grass);
+                id = tasks.GetTaskID((int)ObjectType.Grass);
                 break;
             case ObjectType.Candle:
-                id = questGiver.tasks.GetTaskID((int)ObjectType.Candle);
+                id = tasks.GetTaskID((int)ObjectType.Candle);
                 break;
             case ObjectType.Flowerbed_Blue:
-                id = questGiver.tasks.GetTaskID((int)ObjectType.Flowerbed_Blue);
+                id = tasks.GetTaskID((int)ObjectType.Flowerbed_Blue);
                 break;
             case ObjectType.Flowerbed_Orange:
-                id = questGiver.tasks.GetTaskID((int)ObjectType.Flowerbed_Orange);
+                id = tasks.GetTaskID((int)ObjectType.Flowerbed_Orange);
                 break;
             case ObjectType.Flowerbed_Red:
-                id = questGiver.tasks.GetTaskID((int)ObjectType.Flowerbed_Red);
+                id = tasks.GetTaskID((int)ObjectType.Flowerbed_Red);
                 break;
             case ObjectType.Flowerbed_Turquoise:
-                id = questGiver.tasks.GetTaskID((int)ObjectType.Flowerbed_Turquoise);
+                id = tasks.GetTaskID((int)ObjectType.Flowerbed_Turquoise);
                 break;
             default:
                 break;
@@ -80,120 +83,106 @@ public class InteractableObject : MonoBehaviour
             {
                 case ObjectType.Grave:
                     index = (int)ObjectType.Grave;
-                    if (player.inventory.ItemSelected(questGiver.tasks.GetNeededItem(index)))
+                    if (player.inventory.ItemSelected(tasks.GetNeededItem(index)))
                     {
-                        if (questGiver.tasks.GetNeededItem(index).isConsumable)
-                            player.inventory.RemoveItem(questGiver.tasks.GetNeededItem(index));
+                        if (tasks.GetNeededItem(index).isConsumable)
+                            player.inventory.RemoveItem(tasks.GetNeededItem(index));
                         HandleTask(player, index);
                     }
                     else
                     {
                         //FIXME: Do something when item not in inventory
-                        Debug.Log(
-                            "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
-                        );
+                        Debug.Log("Need Item: " + tasks.GetNeededItem(index).displayName);
                     }
                     break;
                 case ObjectType.Grass:
                     //Check for item
                     index = (int)ObjectType.Grass;
-                    if (player.inventory.ItemSelected(questGiver.tasks.GetNeededItem(index)))
+                    if (player.inventory.ItemSelected(tasks.GetNeededItem(index)))
                     {
-                        if (questGiver.tasks.GetNeededItem(index).isConsumable)
-                            player.inventory.RemoveItem(questGiver.tasks.GetNeededItem(index));
+                        if (tasks.GetNeededItem(index).isConsumable)
+                            player.inventory.RemoveItem(tasks.GetNeededItem(index));
                         HandleTask(player, index);
                     }
                     else
                     {
                         //FIXME: Do something when item not in inventory
-                        Debug.Log(
-                            "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
-                        );
+                        Debug.Log("Need Item: " + tasks.GetNeededItem(index).displayName);
                     }
                     break;
                 case ObjectType.Candle:
                     //Check for item
                     index = (int)ObjectType.Candle;
-                    if (player.inventory.ItemSelected(questGiver.tasks.GetNeededItem(index)))
+                    if (player.inventory.ItemSelected(tasks.GetNeededItem(index)))
                     {
-                        if (questGiver.tasks.GetNeededItem(index).isConsumable)
-                            player.inventory.RemoveItem(questGiver.tasks.GetNeededItem(index));
+                        if (tasks.GetNeededItem(index).isConsumable)
+                            player.inventory.RemoveItem(tasks.GetNeededItem(index));
                         HandleTask(player, index);
                     }
                     else
                     {
                         //FIXME: Do something when item not in inventory
-                        Debug.Log(
-                            "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
-                        );
+                        Debug.Log("Need Item: " + tasks.GetNeededItem(index).displayName);
                     }
                     break;
                 case ObjectType.Flowerbed_Blue:
                     //Check for item
                     index = (int)ObjectType.Flowerbed_Blue;
-                    if (player.inventory.ItemSelected(questGiver.tasks.GetNeededItem(index)))
+                    if (player.inventory.ItemSelected(tasks.GetNeededItem(index)))
                     {
-                        if (questGiver.tasks.GetNeededItem(index).isConsumable)
-                            player.inventory.RemoveItem(questGiver.tasks.GetNeededItem(index));
+                        if (tasks.GetNeededItem(index).isConsumable)
+                            player.inventory.RemoveItem(tasks.GetNeededItem(index));
                         HandleTask(player, index);
                     }
                     else
                     {
                         //FIXME: Do something when item not in inventory
-                        Debug.Log(
-                            "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
-                        );
+                        Debug.Log("Need Item: " + tasks.GetNeededItem(index).displayName);
                     }
                     break;
                 case ObjectType.Flowerbed_Orange:
                     //Check for item
                     index = (int)ObjectType.Flowerbed_Orange;
-                    if (player.inventory.ItemSelected(questGiver.tasks.GetNeededItem(index)))
+                    if (player.inventory.ItemSelected(tasks.GetNeededItem(index)))
                     {
-                        if (questGiver.tasks.GetNeededItem(index).isConsumable)
-                            player.inventory.RemoveItem(questGiver.tasks.GetNeededItem(index));
+                        if (tasks.GetNeededItem(index).isConsumable)
+                            player.inventory.RemoveItem(tasks.GetNeededItem(index));
                         HandleTask(player, index);
                     }
                     else
                     {
                         //FIXME: Do something when item not in inventory
-                        Debug.Log(
-                            "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
-                        );
+                        Debug.Log("Need Item: " + tasks.GetNeededItem(index).displayName);
                     }
                     break;
                 case ObjectType.Flowerbed_Red:
                     //Check for item
                     index = (int)ObjectType.Flowerbed_Red;
-                    if (player.inventory.ItemSelected(questGiver.tasks.GetNeededItem(index)))
+                    if (player.inventory.ItemSelected(tasks.GetNeededItem(index)))
                     {
-                        if (questGiver.tasks.GetNeededItem(index).isConsumable)
-                            player.inventory.RemoveItem(questGiver.tasks.GetNeededItem(index));
+                        if (tasks.GetNeededItem(index).isConsumable)
+                            player.inventory.RemoveItem(tasks.GetNeededItem(index));
                         HandleTask(player, index);
                     }
                     else
                     {
                         //FIXME: Do something when item not in inventory
-                        Debug.Log(
-                            "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
-                        );
+                        Debug.Log("Need Item: " + tasks.GetNeededItem(index).displayName);
                     }
                     break;
                 case ObjectType.Flowerbed_Turquoise:
                     //Check for item
                     index = (int)ObjectType.Flowerbed_Turquoise;
-                    if (player.inventory.ItemSelected(questGiver.tasks.GetNeededItem(index)))
+                    if (player.inventory.ItemSelected(tasks.GetNeededItem(index)))
                     {
-                        if (questGiver.tasks.GetNeededItem(index).isConsumable)
-                            player.inventory.RemoveItem(questGiver.tasks.GetNeededItem(index));
+                        if (tasks.GetNeededItem(index).isConsumable)
+                            player.inventory.RemoveItem(tasks.GetNeededItem(index));
                         HandleTask(player, index);
                     }
                     else
                     {
                         //FIXME: Do something when item not in inventory
-                        Debug.Log(
-                            "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
-                        );
+                        Debug.Log("Need Item: " + tasks.GetNeededItem(index).displayName);
                     }
                     break;
                 default:

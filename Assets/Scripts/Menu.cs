@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using TMPro;
 
 public class Menu : MonoBehaviour
 {
@@ -19,33 +18,19 @@ public class Menu : MonoBehaviour
     [SerializeField]
     private Dialogue dialogue;
 
-    [SerializeField]
-    private TMP_Text speedValue,
-        volumeValue;
-
     public void Exit()
     {
         Application.Quit();
     }
 
-    void Start()
-    {
-        textSlider.value = dialogue.GetSpeed() * 100;
-        speedValue.SetText((textSlider.value / 100).ToString());
-        volumeSlider.value = AudioListener.volume;
-        volumeValue.SetText((int)(volumeSlider.value * 100) + "%");
-    }
-
     public void ChangeTextSpeed()
     {
-        dialogue.ChangeSpeed(textSlider.value / 100);
-        speedValue.SetText((textSlider.value / 100).ToString());
+        dialogue.ChangeSpeed(textSlider.value);
     }
 
     public void ChangeMasterVolume()
     {
         AudioListener.volume = volumeSlider.value;
-        volumeValue.SetText((int)(volumeSlider.value * 100) + "%");
     }
 
     public void OnToggle(InputValue value)

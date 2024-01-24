@@ -59,21 +59,6 @@ public class Tasks : MonoBehaviour
         return tasks[index].neededItem;
     }
 
-    public int GetTaskIndex(int id)
-    {
-        int index = 0;
-        foreach (TaskData task in tasks)
-        {
-            if (task.taskID == id)
-            {
-                break;
-            }
-            else
-                index++;
-        }
-        return index;
-    }
-
     //Get tasks array
     public TaskData[] GetTaskList()
     {
