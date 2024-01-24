@@ -30,19 +30,8 @@ public class NewInventory : MonoBehaviour
         }
         if (!hasItem)
         {
-            if (Container.Count < hotbarSlots)
-            {
-                Container.Add(new InvSlot(_item, _amount));
-                Instantiate(
-                    _item.inventoryPrefab,
-                    Vector3.zero,
-                    Quaternion.identity,
-                    hotbar.transform
-                );
-            }
-            else
-            { //FIXME: What happens when max slots arrived? Add inventory?}
-            }
+            Container.Add(new InvSlot(_item, _amount));
+            Instantiate(_item.inventoryPrefab, Vector3.zero, Quaternion.identity, hotbar.transform);
         }
     }
 
@@ -74,16 +63,16 @@ public class NewInventory : MonoBehaviour
 
     public bool ItemSelected(ItemData _item)
     {
-        bool _hasItem = false;
-        for (int i = 0; i < hotbar.slots.Count; i++)
+        bool isSelected = false;
+
+        if (HasItem(_item))
         {
-            if (hotbar.slots[i].childCount > 1)
-                _hasItem =
-                    hotbar.slots[i].GetChild(0).GetComponent<InventoryItem>().GetData() == _item;
-            if (_hasItem)
-                break;
+            if (Container[hotbar.index].item == _item)
+            {
+                isSelected = true;
+            }
         }
-        return _hasItem;
+        return isSelected;
     }
 
     public void RemoveItem(ItemData _item)

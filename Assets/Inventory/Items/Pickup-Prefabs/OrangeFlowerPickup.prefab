@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2504472592910319482}
   - component: {fileID: 5942229786120595081}
+  - component: {fileID: 7650166390662320314}
   m_Layer: 0
   m_Name: OrangeFlowerPickup
-  m_TagString: Untagged
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,7 +46,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0347bc53cf19fb34e906949da8b085ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: ae72b940dc935324ba26ef7e1f19a498, type: 2}
+  data: {fileID: 11400000, guid: 67ad0f4d45d8d1b41aa80c7504bc222f, type: 2}
+--- !u!136 &7650166390662320314
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4948232490072774666}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5968823946115856155
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,10 +72,9 @@ GameObject:
   - component: {fileID: 2827250798866781592}
   - component: {fileID: 6654439969298203513}
   - component: {fileID: 1630969710643010421}
-  - component: {fileID: 8301293261616800970}
   m_Layer: 0
   m_Name: OrangeFlowerPickupBody
-  m_TagString: Pickup
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,17 +144,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8301293261616800970
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5968823946115856155}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}

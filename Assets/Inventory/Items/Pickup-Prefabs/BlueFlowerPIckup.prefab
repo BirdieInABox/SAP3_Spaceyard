@@ -11,10 +11,9 @@ GameObject:
   - component: {fileID: 7406914861377008731}
   - component: {fileID: 2139101696557228730}
   - component: {fileID: 6292815118490712758}
-  - component: {fileID: 3657717228802376969}
   m_Layer: 0
   m_Name: BlueFlowerPIckupBody
-  m_TagString: Pickup
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3657717228802376969
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379026780165265112}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2940741752759192644
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,9 +93,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5667101446010858292}
   - component: {fileID: 4472972393135747783}
+  - component: {fileID: 6298805941258182396}
   m_Layer: 0
   m_Name: BlueFlowerPIckup
-  m_TagString: Untagged
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,4 +129,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0347bc53cf19fb34e906949da8b085ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: ae72b940dc935324ba26ef7e1f19a498, type: 2}
+  data: {fileID: 11400000, guid: e15fc3f22ea60214288dfe77d05db126, type: 2}
+--- !u!136 &6298805941258182396
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940741752759192644}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

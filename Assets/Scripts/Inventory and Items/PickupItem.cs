@@ -13,10 +13,12 @@ public class PickupItem : MonoBehaviour
         if (isDay == data.daySpawning)
         {
             transform.GetChild(0).gameObject.SetActive(true);
+            gameObject.GetComponent<CapsuleCollider>().enabled = true;
         }
         else
         {
             transform.GetChild(0).gameObject.SetActive(false);
+            gameObject.GetComponent<CapsuleCollider>().enabled = false;
         }
     }
 
@@ -26,5 +28,6 @@ public class PickupItem : MonoBehaviour
         //Possible Animation here
 
         transform.GetChild(0).gameObject.SetActive(false);
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }
 }

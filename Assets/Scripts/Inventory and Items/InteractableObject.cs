@@ -82,6 +82,10 @@ public class InteractableObject : MonoBehaviour
                     index = (int)ObjectType.Grave;
                     if (player.inventory.ItemSelected(questGiver.tasks.GetNeededItem(index)))
                     {
+                        Debug.Log(questGiver.tasks.GetNeededItem(index));
+                        Debug.Log(
+                            player.inventory.ItemSelected(questGiver.tasks.GetNeededItem(index))
+                        );
                         if (questGiver.tasks.GetNeededItem(index).isConsumable)
                             player.inventory.RemoveItem(questGiver.tasks.GetNeededItem(index));
                         HandleTask(player, index);
@@ -236,7 +240,7 @@ public class InteractableObject : MonoBehaviour
         //Reset done status
         isDone = false;
         //FIXME: ADD TO JOURNAL
-
+    
         //FIXME: Replace this model with the uncleared model
         this.gameObject.SetActive(true);
     }

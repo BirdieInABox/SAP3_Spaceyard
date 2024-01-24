@@ -13,11 +13,18 @@ public class Chest : MonoBehaviour
         if (interactable)
         {
             this.gameObject.GetComponent<Animator>().SetTrigger("Open");
-            foreach (ItemData item in itemsGiven)
-            {
-                player.AddItem(item);
-                interactable = false;
-            }
+            StartCoroutine(GiveItems(player));
+            interactable = false;
+        }
+    }
+
+    private IEnumerator GiveItems(Player player)
+    {
+        foreach (ItemData item in itemsGiven)
+        {
+            player.AddItem(item);
+
+            yield return new WaitForSeconds(0.2f);
         }
     }
 }

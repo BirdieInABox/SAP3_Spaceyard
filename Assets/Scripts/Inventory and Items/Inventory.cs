@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 //SCRIPTABLE OBJECT VERSION OF THE INVENTORY, TODO:POSSIBLY OBSOLETE?
 [CreateAssetMenu(fileName = "Inventory", menuName = "Inventory/Inventory", order = 0)]
 public class Inventory : ScriptableObject
@@ -27,14 +26,8 @@ public class Inventory : ScriptableObject
         }
         if (!hasItem)
         {
-            if (Container.Count < hotBarSlots)
-            {
-                Container.Add(new InvSlot(_item, _amount));
-                Instantiate(_item.inventoryPrefab, Vector3.zero, Quaternion.identity);
-            }
-            else
-            { //FIXME: What happens when max slots arrived? Add inventory?}
-            }
+            Container.Add(new InvSlot(_item, _amount));
+            Instantiate(_item.inventoryPrefab, Vector3.zero, Quaternion.identity);
         }
     }
 
