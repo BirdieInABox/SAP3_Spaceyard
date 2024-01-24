@@ -105,6 +105,7 @@ public class Hotbar : MonoBehaviour
     //Unity Input System, getting the direction the scroll wheel is being scrolled in
     public void OnScrollWheel(InputValue value)
     {
+
         //If scrolling is not on cooldown
         if (canScroll)
         {

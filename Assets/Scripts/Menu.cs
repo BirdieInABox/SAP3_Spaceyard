@@ -23,6 +23,9 @@ public class Menu : MonoBehaviour
     private TMP_Text speedValue,
         volumeValue;
 
+    [SerializeField]
+    private Player player;
+
     public void Exit()
     {
         Application.Quit();
@@ -31,7 +34,7 @@ public class Menu : MonoBehaviour
     void Start()
     {
         textSlider.value = dialogue.GetSpeed() * 100;
-        speedValue.SetText((textSlider.value / 100).ToString());
+        speedValue.SetText(((double)textSlider.value / 100).ToString());
         volumeSlider.value = AudioListener.volume;
         volumeValue.SetText((int)(volumeSlider.value * 100) + "%");
     }
@@ -39,7 +42,7 @@ public class Menu : MonoBehaviour
     public void ChangeTextSpeed()
     {
         dialogue.ChangeSpeed(textSlider.value / 100);
-        speedValue.SetText((textSlider.value / 100).ToString());
+        speedValue.SetText(((double)textSlider.value / 100).ToString());
     }
 
     public void ChangeMasterVolume()
@@ -69,6 +72,13 @@ public class Menu : MonoBehaviour
     {
         mainMenu.SetActive(!mainMenu.activeSelf);
         bg.SetActive(!bg.activeSelf);
+        player.stopMovement = !player.stopMovement;
+        player.inventory.hotbar.gameObject.GetComponent<PlayerInput>().enabled =
+            !player.inventory.hotbar.gameObject.GetComponent<PlayerInput>().enabled;
+        /* player.gameObject.GetComponent<PlayerInput>().enabled = !player.gameObject
+             .GetComponent<PlayerInput>()
+             .enabled;
+ */
         ToggleCursor();
     }
 

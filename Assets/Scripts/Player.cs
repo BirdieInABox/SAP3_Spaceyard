@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
 
     public NewInventory inventory; //The player's inventory
     private bool inDialogue = false; //Is the player currently in a dialogue?
+    public bool stopMovement = false;
 
     //When player is created
     void Start()
@@ -44,7 +45,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //Only allow movement outside dialogues
-        if (!inDialogue)
+        if (!inDialogue && !stopMovement)
         {
             //Move
             rb.velocity = new Vector3(
@@ -56,6 +57,10 @@ public class Player : MonoBehaviour
             gameObject.transform.LookAt(
                 new Vector3(direction.x, 0, direction.y) + gameObject.transform.position
             );
+        }
+        else
+        {
+            rb.velocity = new Vector3(0, 0, 0);
         }
         //Walking animation
         anims.SetBool("Walking", rb.velocity != new Vector3(0, 0, 0));
@@ -70,58 +75,63 @@ public class Player : MonoBehaviour
     //Unity Input system
     public void OnInteract(InputValue value)
     {
-        //If there is an interactable object in the touch sensor
-        if (interactObject != null)
-        {
-            //if the interactable object has the InteractableObject component
-            if (
-                interactObject.TryGetComponent<InteractableObject>(
-                    out InteractableObject currObject
+        if (!stopMovement)
+        { //If there is an interactable object in the touch sensor
+            if (interactObject != null)
+            {
+                //if the interactable object has the InteractableObject component
+                if (
+                    interactObject.TryGetComponent<InteractableObject>(
+                        out InteractableObject currObject
+                    )
                 )
-            )
-            {
-                //Interact with the current object
-                currObject.Interaction(this);
+                {
+                    //Interact with the current object
+                    currObject.Interaction(this);
+                }
+                //if the interactable object has the Bed component
+                else if (interactObject.TryGetComponent<Bed>(out Bed currBed))
+                {
+                    //Interact with the bed
+                    currBed.Interaction();
+                }
             }
-            //if the interactable object has the Bed component
-            else if (interactObject.TryGetComponent<Bed>(out Bed currBed))
+            //If there is an NPC in the touch sensor
+            else if (interactNPC != null)
             {
-                //Interact with the bed
-                currBed.Interaction();
+                //If the player isn't in a dialogue yet
+                if (!inDialogue)
+                {
+                    //Start a dialogue with the NPC
+                    interactNPC.InteractionStart();
+                }
+                else //If he player is in a dialogue
+                {
+                    //Coninue the dialogue
+                    interactNPC.InteractionContinue();
+                }
             }
-        }
-        //If there is an NPC in the touch sensor
-        else if (interactNPC != null)
-        {
-            //If the player isn't in a dialogue yet
-            if (!inDialogue)
+            //If there is a pickup object in the touch sensor
+            else if (pickupObject != null)
             {
-                //Start a dialogue with the NPC
-                interactNPC.InteractionStart();
+                //Add the picked-up item to the inventory
+                inventory.AddItem(pickupObject.data, 1);
+                //Trigger the item's pick-up method
+                pickupObject.OnPickup();
             }
-            else //If he player is in a dialogue
+            else if (chest != null)
             {
-                //Coninue the dialogue
-                interactNPC.InteractionContinue();
+                chest.Interaction(this);
             }
-        }
-        //If there is a pickup object in the touch sensor
-        else if (pickupObject != null)
-        {
-            //Add the picked-up item to the inventory
-            inventory.AddItem(pickupObject.data, 1);
-            //Trigger the item's pick-up method
-            pickupObject.OnPickup();
-        }
-        else if (chest != null)
-        {
-            chest.Interaction(this);
         }
     }
 
     public void OnJournal(InputValue value)
     {
         journalUI.SetActive(!journalUI.activeSelf);
+        stopMovement = !stopMovement;
+        inventory.hotbar.gameObject.GetComponent<PlayerInput>().enabled =
+            !inventory.hotbar.gameObject.GetComponent<PlayerInput>().enabled;
         ToggleCursor();
     }
 

@@ -7,7 +7,7 @@ public class NewInventory : MonoBehaviour
     public List<InvSlot> Container = new List<InvSlot>();
 
     [SerializeField]
-    private Hotbar hotbar;
+    public Hotbar hotbar;
 
     private int hotbarSlots;
 
