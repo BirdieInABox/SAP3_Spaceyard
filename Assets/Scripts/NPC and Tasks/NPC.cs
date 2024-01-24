@@ -17,6 +17,8 @@ public class NPC : MonoBehaviour
         public string[] lines = new string[lineID];
     }
 
+    [SerializeField]
+    private Journal journal;
     public Dialogues[] dialogues = new Dialogues[dialogueID];
 
     [SerializeField] //The dialogue handler
@@ -28,8 +30,8 @@ public class NPC : MonoBehaviour
     private int affection = 0; //The level of affection reached
     private int todaysTask = 0; //The ID of today's random task
 
-    [SerializeField] //The list of tasks each generic NPC can trigger
-    private Tasks tasks;
+    //The list of tasks each generic NPC can trigger
+    public Tasks tasks;
 
     [SerializeField] //Which objects are bound to this NPC for its tasks?
     private InteractableObject[] objectives;
@@ -41,15 +43,9 @@ public class NPC : MonoBehaviour
 
     private bool isDay;
 
-    private void Start()
-    {
-        //globalEventManager.MarkEventAsPersistent(GlobalEvent.StartTime);
-        //FIXME: MO: Add a listener that triggers OnReset() on StartTime being broadcasted
-        // globalEventManager.AddListener<bool>(GlobalEvent.StartTime, OnReset);
-    }
-
     public void StartTime(bool _isDay)
     {
+        Debug.Log("Here");
         isDay = _isDay;
         OnReset();
     }
@@ -65,8 +61,7 @@ public class NPC : MonoBehaviour
     //Called when day/night starts
     public void OnReset()
     {
-        float transparencyOnStart = 1f; //FIXME: Fix transparency
-        ChangeTransparency(transparencyOnStart);
+        ChangeTransparency(isDiurnal == isDay);
         if (isDiurnal == isDay) //if nocturnal && is night OR diurnal && is day
             ResetTasks();
     }
@@ -98,6 +93,12 @@ public class NPC : MonoBehaviour
         {
             dialogueID = todaysTask;
             taskAccepted = true;
+            int index = tasks.GetTaskIndex(todaysTask);
+            journal.AddEntry(
+                this.name,
+                tasks.GetTaskName(index),
+                tasks.GetNeededItem(index).displayName
+            );
         }
     }
 
@@ -109,34 +110,26 @@ public class NPC : MonoBehaviour
     }
 
     //If player gets close, become visible
-    private void OnTriggerEnter(
-        Collider other
-    ) { /*
-        if ((other.gameObject.tag == "Player") && isDiurnal == isDay)
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((other.gameObject.tag == "Player"))
         {
-            float transparencyOnAppearance = 1f;
-            ChangeTransparency(transparencyOnAppearance);
-        }*/
+            ChangeTransparency(isDiurnal == isDay);
+        }
     }
 
-    private void OnTriggerExit(
-        Collider other
-    ) { /*
+    private void OnTriggerExit(Collider other)
+    {
         if (other.gameObject.tag == "Player")
         {
-            float transparencyOnAppearance = 0f;
-            ChangeTransparency(transparencyOnAppearance);
-        }*/
+            ChangeTransparency(isDiurnal == isDay);
+        }
     }
 
-    //FIXME: Needs material shader that allows transparency
-    //TODO: Set active/inactive
     //Changes the NPC's transparency
-    private void ChangeTransparency(float transparency)
+    private void ChangeTransparency(bool transparency)
     {
-        // var col = this.gameObject.GetComponent<Renderer>().material.color;
-        // col.a = transparency;
-        // gameObject.SetActive(transparency == 1);
+        transform.GetChild(0).gameObject.SetActive(transparency);
     }
 
     //Dialogue gets started
@@ -161,6 +154,7 @@ public class NPC : MonoBehaviour
         System.Random random = new System.Random();
         int taskIndex = random.Next(0, (tasks.NumOfTasks() - 1));
         todaysTask = tasks.GetTaskID(taskIndex);
+
         StartTask(taskIndex);
     }
 }
