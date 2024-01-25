@@ -45,7 +45,6 @@ public class NPC : MonoBehaviour
 
     public void StartTime(bool _isDay)
     {
-        Debug.Log("Here");
         isDay = _isDay;
         OnReset();
     }
@@ -107,6 +106,7 @@ public class NPC : MonoBehaviour
     {
         taskDone = true;
         affection++;
+        journal.RemoveEntry(this.name);
     }
 
     //If player gets close, become visible

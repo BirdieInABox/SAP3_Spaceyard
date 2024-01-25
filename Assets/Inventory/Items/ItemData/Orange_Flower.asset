@@ -18,5 +18,5 @@ MonoBehaviour:
   isConsumable: 1
   daySpawning: 0
   description: A beautiful red rose with carefully removed thorns.
-  pickupPrefab: {fileID: 7186983209520627287, guid: d5214fd942d0c2640ae9d996928bf39d, type: 3}
+  pickupPrefab: {fileID: 4948232490072774666, guid: 22ed85431db5d734bb05db51bf921d81, type: 3}
   inventoryPrefab: {fileID: 2179537101637361016, guid: 8fc66e78463727044960334945fb69e1, type: 3}

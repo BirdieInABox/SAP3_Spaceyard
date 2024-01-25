@@ -16,7 +16,7 @@ public class Hotbar : MonoBehaviour
     private int numOfChildren;
 
     //The index of the currently selected slot
-    private int index = 0;
+    public int index = 0;
 
     //Enable/Disable scroll
     private bool canScroll = true;
@@ -37,7 +37,7 @@ public class Hotbar : MonoBehaviour
         HighlightSlot();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         //Keep a tap on the number of children
         CheckNumOfChildren();
@@ -80,10 +80,9 @@ public class Hotbar : MonoBehaviour
                 lastChild.SetAsFirstSibling();
                 childRT = lastChild.GetComponent<RectTransform>();
                 //Pack it neatly into the square and allow it to  grow when highlighted
-                childRT.offsetMin = new Vector2(0, 0);
-                childRT.offsetMax = new Vector2(1, 1);
-                childRT.localPosition = new Vector3(0, 0, 0);
-                childRT.localScale = new Vector3(1, 1, 1);
+
+                childRT.localPosition = Vector3.zero;
+                childRT.localScale = Vector3.one;
                 //gtfo of here
                 break;
             }
@@ -93,7 +92,7 @@ public class Hotbar : MonoBehaviour
     //When a slot is no longer highlighted, shrink it to normal size
     private void ResetSlot()
     {
-        slots[index].transform.localScale = new Vector3(1, 1, 1);
+        slots[index].transform.localScale = Vector3.one;
     }
 
     //When a slot is highlighted, make it grow slightly
@@ -105,7 +104,6 @@ public class Hotbar : MonoBehaviour
     //Unity Input System, getting the direction the scroll wheel is being scrolled in
     public void OnScrollWheel(InputValue value)
     {
-
         //If scrolling is not on cooldown
         if (canScroll)
         {

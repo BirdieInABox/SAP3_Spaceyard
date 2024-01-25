@@ -28,7 +28,7 @@ public class Journal : MonoBehaviour
         {
             if (child.GetComponent<JournalEntry>().giver == npc)
             {
-                Destroy(child);
+                Destroy(child.gameObject);
                 break;
             }
         }

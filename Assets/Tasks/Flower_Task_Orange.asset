@@ -16,4 +16,4 @@ MonoBehaviour:
   taskID: 6
   objectPrefab: {fileID: 0}
   journalPrefab: {fileID: 0}
-  neededItem: {fileID: 11400000, guid: ae72b940dc935324ba26ef7e1f19a498, type: 2}
+  neededItem: {fileID: 11400000, guid: 67ad0f4d45d8d1b41aa80c7504bc222f, type: 2}

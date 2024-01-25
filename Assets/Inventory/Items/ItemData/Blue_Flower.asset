@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80a873d6f2de32f4cb99f19b1d2d4f00, type: 3}
   m_Name: Blue_Flower
   m_EditorClassIdentifier: 
-  displayName: Red Flower
+  displayName: Blue Flower
   itemID: 1
   icon: {fileID: 21300000, guid: b0b1644ef088a5546833bc79034d4fd7, type: 3}
   isConsumable: 1
-  daySpawning: 0
+  daySpawning: 1
   description: A beautiful red rose with carefully removed thorns.
-  pickupPrefab: {fileID: 7186983209520627287, guid: d5214fd942d0c2640ae9d996928bf39d, type: 3}
+  pickupPrefab: {fileID: 2940741752759192644, guid: 0f80f01e86feab54988292c81285210b, type: 3}
   inventoryPrefab: {fileID: 2179537101637361016, guid: 2b04a0b9b4439d44f9f616853b82e3be, type: 3}
