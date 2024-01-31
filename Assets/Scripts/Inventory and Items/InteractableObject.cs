@@ -239,7 +239,6 @@ public class InteractableObject : MonoBehaviour
     {
         //Reset done status
         isDone = false;
-        //FIXME: ADD TO JOURNAL
     
         //FIXME: Replace this model with the uncleared model
         this.gameObject.SetActive(true);

@@ -72,10 +72,8 @@ public class NPC : MonoBehaviour
         objectiveList.Sort((a, b) => a.GetID().CompareTo(b.GetID()));
         objectives = objectiveList.ToArray();
         objectives[index].gameObject.SetActive(true);
+        objectiveList[index].gameObject.GetComponent<InteractableObject>().StartTask();
     }
-
-    //Sorts the array of objectives to mirror the array of tasks
-    private void SortTasks() { }
 
     //Depending on the status of today's task, choose the dialogue that is shown next
     private void ChooseDialogue()

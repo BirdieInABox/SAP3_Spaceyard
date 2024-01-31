@@ -34,15 +34,15 @@ public class Menu : MonoBehaviour
     void Start()
     {
         textSlider.value = dialogue.GetSpeed() * 100;
-        speedValue.SetText(((double)textSlider.value / 100).ToString());
+        speedValue.SetText(((double)(textSlider.value)).ToString());
         volumeSlider.value = AudioListener.volume;
         volumeValue.SetText((int)(volumeSlider.value * 100) + "%");
     }
 
     public void ChangeTextSpeed()
     {
-        dialogue.ChangeSpeed(textSlider.value / 100);
-        speedValue.SetText(((double)textSlider.value / 100).ToString());
+        dialogue.ChangeSpeed(1 / (textSlider.value * 10));
+        speedValue.SetText(((double)(textSlider.value)).ToString());
     }
 
     public void ChangeMasterVolume()
