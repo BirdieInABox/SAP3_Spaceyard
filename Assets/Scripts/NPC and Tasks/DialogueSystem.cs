@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Dialogue : MonoBehaviour
+public class DialogueSystem : MonoBehaviour
 {
     //The text-field of the dialogue window
     [SerializeField]
     private TextMeshProUGUI textContent;
 
     [SerializeField]
-    private Player player;
+    private PlayerController player;
 
     //The different texts of the dialogue, in order of appearance
 

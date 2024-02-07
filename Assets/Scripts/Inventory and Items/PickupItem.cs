@@ -8,6 +8,7 @@ public class PickupItem : MonoBehaviour
     //The Item associated with this
     public ItemData data;
 
+    //Determine whether or not the item spawns
     public void StartTime(bool isDay)
     {
         if (isDay == data.daySpawning)
@@ -26,7 +27,11 @@ public class PickupItem : MonoBehaviour
     public void OnPickup()
     {
         //Possible Animation here
+        Pickup();
+    }
 
+    protected virtual void Pickup()
+    {
         transform.GetChild(0).gameObject.SetActive(false);
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }

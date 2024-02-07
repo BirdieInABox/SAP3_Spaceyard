@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 5286174464409952442}
   - component: {fileID: 4801003607869534774}
   m_Layer: 5
-  m_Name: Journal Entry
+  m_Name: Journal Entry Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

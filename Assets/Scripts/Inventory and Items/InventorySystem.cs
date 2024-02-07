@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewInventory : MonoBehaviour
+public class InventorySystem : MonoBehaviour
 {
     public List<InvSlot> Container = new List<InvSlot>();
 

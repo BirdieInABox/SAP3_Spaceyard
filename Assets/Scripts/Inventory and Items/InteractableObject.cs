@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    //FIXME: connect this choice to the list of tasks in Tasks.cs
     //The types of items
     private enum ObjectType
     {
@@ -68,7 +67,7 @@ public class InteractableObject : MonoBehaviour
     }
 
     //The interaction
-    public void Interaction(Player player)
+    public void Interaction(PlayerController player)
     {
         //if the task hasn't been cleared yet
         if (!isDone)
@@ -92,7 +91,7 @@ public class InteractableObject : MonoBehaviour
                     }
                     else
                     {
-                        //FIXME: Do something when item not in inventory
+                        //TODO: Do something when item not in inventory
                         Debug.Log(
                             "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
                         );
@@ -109,7 +108,7 @@ public class InteractableObject : MonoBehaviour
                     }
                     else
                     {
-                        //FIXME: Do something when item not in inventory
+                        //TODO: Do something when item not in inventory
                         Debug.Log(
                             "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
                         );
@@ -126,7 +125,7 @@ public class InteractableObject : MonoBehaviour
                     }
                     else
                     {
-                        //FIXME: Do something when item not in inventory
+                        //TODO: Do something when item not in inventory
                         Debug.Log(
                             "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
                         );
@@ -143,7 +142,7 @@ public class InteractableObject : MonoBehaviour
                     }
                     else
                     {
-                        //FIXME: Do something when item not in inventory
+                        //TODO: Do something when item not in inventory
                         Debug.Log(
                             "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
                         );
@@ -160,7 +159,7 @@ public class InteractableObject : MonoBehaviour
                     }
                     else
                     {
-                        //FIXME: Do something when item not in inventory
+                        //TODO: Do something when item not in inventory
                         Debug.Log(
                             "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
                         );
@@ -177,7 +176,7 @@ public class InteractableObject : MonoBehaviour
                     }
                     else
                     {
-                        //FIXME: Do something when item not in inventory
+                        //TODO: Do something when item not in inventory
                         Debug.Log(
                             "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
                         );
@@ -194,7 +193,7 @@ public class InteractableObject : MonoBehaviour
                     }
                     else
                     {
-                        //FIXME: Do something when item not in inventory
+                        //TODO: Do something when item not in inventory
                         Debug.Log(
                             "Need Item: " + questGiver.tasks.GetNeededItem(index).displayName
                         );
@@ -208,7 +207,7 @@ public class InteractableObject : MonoBehaviour
     }
 
     //The handler for the interaction
-    private void HandleTask(Player player, int taskID)
+    private void HandleTask(PlayerController player, int taskID)
     { //Trigger player animations
         player.anims.SetFloat("TaskID", taskID);
         player.anims.SetTrigger("DoTask");
@@ -227,7 +226,7 @@ public class InteractableObject : MonoBehaviour
     public void FinishTask()
     {
         isDone = true;
-        //FIXME: Replace this model with the cleared model
+        //TODO: Replace this model with the cleared model
 
 
         //For now, just disappear
@@ -239,8 +238,8 @@ public class InteractableObject : MonoBehaviour
     {
         //Reset done status
         isDone = false;
-    
-        //FIXME: Replace this model with the uncleared model
+
+        //TODO: Replace this model with the uncleared model
         this.gameObject.SetActive(true);
     }
 }

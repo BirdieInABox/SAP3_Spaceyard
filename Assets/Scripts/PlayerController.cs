@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed = 5f; //The walking speed
@@ -14,14 +14,14 @@ public class Player : MonoBehaviour
     private BoxCollider touchSensor; //A hitbox in front of the player
     private GameObject interactObject; //An interactable object within the touch sensor
     private PickupItem pickupObject; //A pickupable object within the touch sensor
-    private Chest chest; //A chest within the touch sensor
+    private ChestController chest; //A chest within the touch sensor
     private NPC interactNPC; //An NPC within the touch sensor
 
     [SerializeField]
     private GameObject journalUI;
     public Animator anims; //The player's animation controller
 
-    public NewInventory inventory; //The player's inventory
+    public InventorySystem inventory; //The player's inventory
     private bool inDialogue = false; //Is the player currently in a dialogue?
     public bool stopMovement = false;
 
@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
                     currObject.Interaction(this);
                 }
                 //if the interactable object has the Bed component
-                else if (interactObject.TryGetComponent<Bed>(out Bed currBed))
+                else if (interactObject.TryGetComponent<BedController>(out BedController currBed))
                 {
                     //Interact with the bed
                     currBed.Interaction();
@@ -161,7 +161,7 @@ public class Player : MonoBehaviour
         else if (other.gameObject.tag == "Pickup")
             pickupObject = other.gameObject.GetComponent<PickupItem>();
         else if (other.gameObject.tag == "Chest")
-            chest = other.gameObject.GetComponent<Chest>();
+            chest = other.gameObject.GetComponent<ChestController>();
     }
 
     //Touch sensor

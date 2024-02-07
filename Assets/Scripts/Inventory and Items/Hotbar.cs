@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class Hotbar : MonoBehaviour
 {
     [SerializeField] //The inventory
-    private NewInventory inventory;
+    private InventorySystem inventory;
 
     //The list of inventory slots
     public List<Transform> slots = new List<Transform>();

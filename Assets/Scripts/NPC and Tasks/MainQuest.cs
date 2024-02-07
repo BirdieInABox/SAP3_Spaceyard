@@ -21,7 +21,7 @@ public class MainQuest : MonoBehaviour
     public Dialogues[] dialoguesChapter2 = new Dialogues[dialogueID];
 
     [SerializeField] //The dialogue handler
-    private Dialogue dialogueSystem;
+    private DialogueSystem dialogueSystem;
 
     private int chapter = 1; //How far into the main quest is the player?
 
@@ -35,7 +35,7 @@ public class MainQuest : MonoBehaviour
     private InteractableObject[] candles;
 
     [SerializeField]
-    private PickupItem key;
+    private GateKey key;
 
     [SerializeField] //Should the NPC appear at day or at night?
     private bool isDiurnal;

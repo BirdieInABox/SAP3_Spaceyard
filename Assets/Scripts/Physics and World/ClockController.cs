@@ -8,11 +8,8 @@ using UnityEngine.SceneManagement;
 //A script to control the sol cycle
 
 
-public class Clock : MonoBehaviour
+public class ClockController : MonoBehaviour
 {
-    //FIXME: MO: Creation of a new EventManager Instance
-    // private EventManager<GlobalEvent> globalEventManager = new EventManager<GlobalEvent>();
-
     [SerializeField]
     private GameObject[] alarmRecipients;
 
@@ -63,7 +60,7 @@ public class Clock : MonoBehaviour
     public Quaternion spawnRotation;
 
     [SerializeField]
-    private Player player;
+    private PlayerController player;
 
     [SerializeField]
     private LightChanges lightSource;
@@ -149,15 +146,11 @@ public class Clock : MonoBehaviour
         player.gameObject.transform.position = spawnPos;
         player.gameObject.transform.rotation = spawnRotation;
         Alarm();
-        //FIXME: MO: Broadcast for the event StartTime
-        //  globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 
     //start new day
     public void StartDay()
     {
-        //FIXME: Reload scene?
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         //if player is gonna oversleep, change day start to late day start
         if (startLateDay)
             currMinimum = lateDayStartDegrees;
@@ -168,30 +161,34 @@ public class Clock : MonoBehaviour
         player.gameObject.transform.rotation = spawnRotation;
 
         //reset bools and timer%
-        //TODO: RESET JOURNAL
         timeLeft = dayDuration;
         isDay = true;
         startLateDay = false;
         startNight = true;
         Alarm();
-        //FIXME: MO: Broadcast for the event StartTime
-        //  globalEventManager.Broadcast<bool>(GlobalEvent.StartTime, isDay);
     }
 
+    //Called when player wakes up
+    //Alternative to broadcast system
     private void Alarm()
     {
+        //goes through every recipient
         foreach (GameObject recipient in alarmRecipients)
         {
+            //If it's a pickup item
             if (recipient.TryGetComponent<PickupItem>(out PickupItem currItem))
             {
                 //Interact with the current object
                 currItem.StartTime(isDay);
             }
+            //If it's an NPC
             else if (recipient.TryGetComponent<NPC>(out NPC currNPC))
             {
+                //Interact with the current NPC
                 currNPC.StartTime(isDay);
             }
         }
+        //Change colour to day/night colour
         lightSource.ChangeColor(isDay);
     }
 }

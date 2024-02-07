@@ -18,11 +18,11 @@ public class NPC : MonoBehaviour
     }
 
     [SerializeField]
-    private Journal journal;
+    private JournalSystem journal;
     public Dialogues[] dialogues = new Dialogues[dialogueID];
 
     [SerializeField] //The dialogue handler
-    private Dialogue dialogueSystem;
+    private DialogueSystem dialogueSystem;
 
     private bool taskDone = false; //Has the player finished today's task?
 

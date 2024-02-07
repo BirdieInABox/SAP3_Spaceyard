@@ -4,24 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-/* TODO: Cleanup
-public struct TaskData
-{
-    public int neededItemID;
-    public string taskName;
-}
-
-public class Tasks : Dictionary<int, TaskData>
-{
-    public void Add(int key, int val1, string val2)
-    {
-        TaskData data;
-        data.neededItemID = val1;
-        data.taskName = val2;
-        this.Add(key, data);
-    }
-}
-*/
 public class Tasks : MonoBehaviour
 {
     [SerializeField] //Array of tasks
@@ -80,24 +62,3 @@ public class Tasks : MonoBehaviour
         return tasks;
     }
 }
-/* TODO: Cleanup
-    [SerializeField]
-    private InventoryItem[] neededItem;
-
-    [SerializeField]
-    private int startIndex = 2;
-    Tasks<int, TaskData> task = new Tasks<int, TaskData>();
-
-    void Start()
-    {
-        int key = startIndex;
-        int i = 0;
-
-        foreach (string name in taskNames)
-        {
-            task.Add(key, neededItem[i].GetData().itemID, name);
-            i++;
-            key++;
-        }
-    }
-}*/

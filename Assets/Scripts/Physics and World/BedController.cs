@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Just use extra type of Interactable Object? Would need clock reference in IntObj though
-public class Bed : MonoBehaviour
+public class BedController : MonoBehaviour
 {
     [SerializeField]
-    private Clock clock;
+    private ClockController clock;
 
     //Manually end the day when the player interacts with this
     public void Interaction()
