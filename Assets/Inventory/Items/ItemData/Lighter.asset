@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Lighter
   itemID: 4
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4986c86407d16cd418396a549dc4720e, type: 3}
   isConsumable: 0
   daySpawning: 0
   description: 

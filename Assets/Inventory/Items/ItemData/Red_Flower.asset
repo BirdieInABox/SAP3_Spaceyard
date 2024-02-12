@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Red Flower
   itemID: 1
-  icon: {fileID: 21300000, guid: b0b1644ef088a5546833bc79034d4fd7, type: 3}
+  icon: {fileID: 21300000, guid: f4e37ea4f2b735b46970000ba360a2d7, type: 3}
   isConsumable: 1
   daySpawning: 1
   description: A beautiful red rose with carefully removed thorns.

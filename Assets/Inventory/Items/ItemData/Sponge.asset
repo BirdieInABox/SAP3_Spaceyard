@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Sponge
   itemID: 3
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 13950a586f9e5dd428e829c4d8cc6a6e, type: 3}
   isConsumable: 0
   daySpawning: 0
   description: 
