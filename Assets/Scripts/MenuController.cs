@@ -42,8 +42,8 @@ public class MenuController : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("MasterVolume"))
         {
-            PlayerPrefs.SetFloat("MasterVolume", 0.5f);
-            PlayerPrefs.SetFloat("TextSpeed", 5f);
+            PlayerPrefs.SetFloat("MasterVolume", 0.2f);
+            PlayerPrefs.SetFloat("TextSpeed", 2f);
             PlayerPrefs.Save();
         }
         //Set base state of sliders
