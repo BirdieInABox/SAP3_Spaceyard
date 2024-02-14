@@ -15815,10 +15815,6 @@ PrefabInstance:
       propertyPath: tasks
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3901107755652366311, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
-      propertyPath: objectType
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4086291843459330857, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -15882,10 +15878,6 @@ PrefabInstance:
     - target: {fileID: 6409287323293496271, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: tasks
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6409287323293496271, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
-      propertyPath: objectType
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7331027470638383044, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: tasks

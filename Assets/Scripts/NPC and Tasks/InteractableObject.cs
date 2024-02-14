@@ -11,9 +11,9 @@ public class InteractableObject : MonoBehaviour
         Grave = 0,
         Grass = 1,
         Candle = 2,
-        Flowerbed_Blue = 3,
+        Flowerbed_Red = 3,
         Flowerbed_Orange = 4,
-        Flowerbed_Red = 5,
+        Flowerbed_Blue = 5,
         Flowerbed_Turquoise = 6,
         Other = 99
     }
@@ -81,10 +81,6 @@ public class InteractableObject : MonoBehaviour
                     index = (int)ObjectType.Grave;
                     if (player.inventory.ItemSelected(questGiver.tasks.GetNeededItem(index)))
                     {
-                        Debug.Log(questGiver.tasks.GetNeededItem(index));
-                        Debug.Log(
-                            player.inventory.ItemSelected(questGiver.tasks.GetNeededItem(index))
-                        );
                         if (questGiver.tasks.GetNeededItem(index).isConsumable)
                             player.inventory.RemoveItem(questGiver.tasks.GetNeededItem(index));
                         HandleTask(player, index);
