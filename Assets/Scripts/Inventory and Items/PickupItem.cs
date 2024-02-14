@@ -8,6 +8,9 @@ public class PickupItem : MonoBehaviour
     //The Item associated with this
     public ItemData data;
 
+    [SerializeField]
+    private PlayerController player;
+
     //Determine whether or not the item spawns
     public void StartTime(bool isDay)
     {
@@ -32,6 +35,7 @@ public class PickupItem : MonoBehaviour
 
     protected virtual void Pickup()
     {
+        player.ResetPickup();
         transform.GetChild(0).gameObject.SetActive(false);
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
     }

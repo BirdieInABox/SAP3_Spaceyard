@@ -52,15 +52,21 @@ public class NPC : MonoBehaviour
     //Reset the state of tasks and randomize a new taksID
     public void ResetTasks()
     {
+        foreach (var objective in objectives)
+        {
+            objective.gameObject.SetActive(false);
+        }
+        journal.RemoveEntry(this.name);
         taskAccepted = false;
         taskDone = false;
+
         RandomizeTask();
     }
 
     //Called when day/night starts
     public void OnReset()
     {
-        ChangeTransparency(isDiurnal == isDay);
+        // ChangeTransparency(isDiurnal == isDay);
         if (isDiurnal == isDay) //if nocturnal && is night OR diurnal && is day
             ResetTasks();
     }
@@ -72,7 +78,7 @@ public class NPC : MonoBehaviour
         objectiveList.Sort((a, b) => a.GetID().CompareTo(b.GetID()));
         objectives = objectiveList.ToArray();
         objectives[index].gameObject.SetActive(true);
-        objectiveList[index].gameObject.GetComponent<InteractableObject>().StartTask();
+        objectives[index].StartTask();
     }
 
     //Depending on the status of today's task, choose the dialogue that is shown next

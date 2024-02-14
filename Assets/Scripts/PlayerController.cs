@@ -188,4 +188,11 @@ public class PlayerController : MonoBehaviour
     {
         interactObject = null;
     }
+
+    public void ResetPickup()
+    {
+        Debug.Log("Here");
+
+        pickupObject = null;
+    }
 }

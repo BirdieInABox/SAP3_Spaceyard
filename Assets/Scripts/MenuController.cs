@@ -84,6 +84,8 @@ public class MenuController : MonoBehaviour
         //if settings are open
         if (settingsMenu.activeSelf)
         {
+            Time.timeScale = 1;
+            player.stopMovement = !player.stopMovement;
             //deactivate all menus manually
             settingsMenu.SetActive(false);
             bg.SetActive(false);
@@ -103,6 +105,10 @@ public class MenuController : MonoBehaviour
     //Turns on/off menu
     public void ToggleMenu()
     {
+        if (Time.timeScale == 0)
+            Time.timeScale = 1;
+        else
+            Time.timeScale = 0;
         //toggle menu object
         mainMenu.SetActive(!mainMenu.activeSelf);
         //toggle menu background

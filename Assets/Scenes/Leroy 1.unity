@@ -1315,6 +1315,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5967959507431516804, guid: 6c8ba2da3aa85f14cae225ca71581129, type: 3}
+      propertyPath: entryPrefab
+      value: 
+      objectReference: {fileID: 7843016064768845486, guid: 88ea14b760d9d9c4ca97780206cc16f0, type: 3}
+    - target: {fileID: 5967959507431516804, guid: 6c8ba2da3aa85f14cae225ca71581129, type: 3}
+      propertyPath: contentPanel
+      value: 
+      objectReference: {fileID: 976228278}
     - target: {fileID: 6315924689950114442, guid: 6c8ba2da3aa85f14cae225ca71581129, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -2976,6 +2984,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TurquoiseFlowerPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 1908136313456323040, guid: 24bcb5ae53d5fde43b07bdafcb6ff378, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1795653371}
     - target: {fileID: 6528010527082736948, guid: 24bcb5ae53d5fde43b07bdafcb6ff378, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7972,6 +7984,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7960326388330237481, guid: 74cbbc55bf437b143ad38df7928f6375, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1795653371}
     - target: {fileID: 8693195325226397866, guid: 74cbbc55bf437b143ad38df7928f6375, type: 3}
       propertyPath: m_Name
       value: RedFlowerPickup
@@ -9216,6 +9232,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4007401, y: 4.0428233, z: 2.1975038}
   m_Center: {x: -0.015548639, y: 1.6263453, z: -0.0452152}
+--- !u!1 &976228278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6315924690589756030, guid: 6c8ba2da3aa85f14cae225ca71581129, type: 3}
+  m_PrefabInstance: {fileID: 156640436}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &992541267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10391,7 +10412,7 @@ PrefabInstance:
       objectReference: {fileID: 156640437}
     - target: {fileID: 4553786547208145431, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
       propertyPath: moveSpeed
-      value: 1500
+      value: 6000
       objectReference: {fileID: 0}
     - target: {fileID: 4652940458363145662, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
       propertyPath: m_Constraints
@@ -10452,6 +10473,10 @@ PrefabInstance:
     - target: {fileID: 6389229519164161589, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861349194317651136, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
+      propertyPath: Container.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7087116634316341003, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
       propertyPath: m_AnchorMax.y
@@ -10958,6 +10983,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueFlowerPIckup
       objectReference: {fileID: 0}
+    - target: {fileID: 4472972393135747783, guid: 0f80f01e86feab54988292c81285210b, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1795653371}
     - target: {fileID: 5667101446010858292, guid: 0f80f01e86feab54988292c81285210b, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -14982,6 +15011,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrangeFlowerPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 5942229786120595081, guid: 22ed85431db5d734bb05db51bf921d81, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1795653371}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22ed85431db5d734bb05db51bf921d81, type: 3}
 --- !u!224 &1766349213 stripped
@@ -15782,6 +15815,10 @@ PrefabInstance:
       propertyPath: tasks
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3901107755652366311, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
+      propertyPath: objectType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4086291843459330857, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -15845,6 +15882,10 @@ PrefabInstance:
     - target: {fileID: 6409287323293496271, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: tasks
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6409287323293496271, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
+      propertyPath: objectType
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7331027470638383044, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: tasks

@@ -33,6 +33,10 @@ public class InventorySystem : MonoBehaviour
             Container.Add(new InvSlot(_item, _amount));
             Instantiate(_item.inventoryPrefab, Vector3.zero, Quaternion.identity, hotbar.transform);
         }
+        else
+        {
+            hotbar.AddOrReduceItem(_item);
+        }
     }
 
     public bool HasItem(ItemData _item)
@@ -47,7 +51,7 @@ public class InventorySystem : MonoBehaviour
         return _hasItem;
     }
 
-    private int FindItem(ItemData _item)
+    public int FindItem(ItemData _item)
     {
         int _index = 0;
         for (int i = 0; i < Container.Count; i++)
@@ -79,11 +83,17 @@ public class InventorySystem : MonoBehaviour
     {
         if (HasItem(_item))
         {
+            Debug.Log("Here");
             int index = FindItem(_item);
             Container[index].ReduceAmount(1);
             if (Container[index].amount <= 0)
             {
+                hotbar.RemoveItem(_item);
                 Container.RemoveAt(index);
+            }
+            else
+            {
+                hotbar.AddOrReduceItem(_item);
             }
         }
     }

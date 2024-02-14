@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Hotbar : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class Hotbar : MonoBehaviour
         var lastChild = transform.GetChild(transform.childCount - 1);
         RectTransform childRT;
         //Check for an empty hotbar slot
-        foreach (var slot in slots)
+        foreach (Transform slot in slots)
         {
             //If a slot is empty
             if (slot.childCount == 1)
@@ -83,7 +84,61 @@ public class Hotbar : MonoBehaviour
 
                 childRT.localPosition = Vector3.zero;
                 childRT.localScale = Vector3.one;
+                int _amount = inventory.Container[
+                    inventory.FindItem(slot.GetComponentInChildren<InventoryItem>().GetData())
+                ].amount;
+                slot.GetComponentInChildren<TextMeshProUGUI>().SetText(_amount.ToString());
                 //gtfo of here
+                break;
+            }
+        }
+    }
+
+
+    public void RemoveItem(ItemData data)
+    {
+        Debug.Log("Remove");
+        foreach (var slot in slots)
+        {
+            if (
+                slot.childCount == 2
+                && slot.GetComponentInChildren<InventoryItem>().GetData().itemID == data.itemID
+            )
+            {
+                slot.GetComponentInChildren<TextMeshProUGUI>()
+                    .SetText(
+                        inventory.Container[
+                            inventory.FindItem(
+                                slot.GetComponentInChildren<InventoryItem>().GetData()
+                            )
+                        ].amount.ToString()
+                    );
+
+                Debug.Log(slot.GetComponentInChildren<InventoryItem>().transform.name);
+                Destroy(slot.GetComponentInChildren<InventoryItem>().gameObject);
+                break;
+            }
+        }
+    }
+
+    public void AddOrReduceItem(ItemData data)
+    {
+        Debug.Log("Reduce");
+        foreach (var slot in slots)
+        {
+            if (
+                slot.childCount == 2
+                && slot.GetComponentInChildren<InventoryItem>().GetData() == data
+            )
+            {
+                slot.GetComponentInChildren<TextMeshProUGUI>()
+                    .SetText(
+                        inventory.Container[
+                            inventory.FindItem(
+                                slot.GetComponentInChildren<InventoryItem>().GetData()
+                            )
+                        ].amount.ToString()
+                    );
                 break;
             }
         }
