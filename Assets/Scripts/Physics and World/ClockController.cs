@@ -10,36 +10,43 @@ using UnityEngine.SceneManagement;
 
 public class ClockController : MonoBehaviour
 {
+    [Tooltip("Drag every NPC and Flower in here.")]
     [SerializeField]
     private GameObject[] alarmRecipients;
 
-    [SerializeField] //The end of the rotation in the circle
+    //The end of the rotation in the circle
     private int maximum = 360;
 
-    [SerializeField] //The start of the rotation in the circle
+    //The start of the rotation in the circle
     private int minimum = 0;
     private int currMinimum = 0; //The starting degrees of the current cycle
 
+    [Tooltip("Enter as fraction of 24h (8/24 = 8am, 20/24 = 8pm)")]
     [SerializeField] //Enter in inspector as fraction of 24h (8/24 = 8am, 20/24 = 8pm)
     private float earlyDayStart = (8 / 24);
     private int earlyDayStartDegrees; //The calculated degrees of earlyDayStart
 
+    [Tooltip("Enter as fraction of 24h (8/24 = 8am, 20/24 = 8pm)")]
     [SerializeField] //Enter in inspector as fraction of 24h (8/24 = 8am, 20/24 = 8pm)
     private float lateDayStart = (12 / 24);
     private int lateDayStartDegrees; //The calculated degrees of lateDayStart
 
+    [Tooltip("Enter as fraction of 24h (8/24 = 8am, 20/24 = 8pm)")]
     [SerializeField] //Enter in inspector as fraction of 24h (8/24 = 8am, 20/24 = 8pm)
     private float earlyDayEnd = (18 / 24);
     private int earlyDayEndDegrees; //The calculated degrees of earlyDayEnd
 
+    [Tooltip("Enter as fraction of 24h (8/24 = 8am, 20/24 = 8pm)")]
     [SerializeField] //Enter in inspector as fraction of 24h (8/24 = 8am, 20/24 = 8pm)
     private float lateDayEnd = (23 / 24);
     private int lateDayEndDegrees; //The calculated degrees of lateDayEnd
 
+    [Tooltip("Enter as fraction of 24h (8/24 = 8am, 20/24 = 8pm)")]
     [SerializeField] //Enter in inspector as fraction of 24h (8/24 = 8am, 20/24 = 8pm)
     private float nightStart = (23 / 24);
     private int nightStartDegrees; //The calculated degrees of nightStart
 
+    [Tooltip("Enter as fraction of 24h (8/24 = 8am, 20/24 = 8pm)")]
     [SerializeField] //Enter in inspector as fraction of 24h (8/24 = 8am, 20/24 = 8pm)
     private float nightEnd = (3 / 24);
     private int nightEndDegrees; //The calculated degrees of nightEnd
@@ -48,15 +55,24 @@ public class ClockController : MonoBehaviour
     private float percentile;
 
     //The time left in the current cycle
-    public float timeLeft;
+    private float timeLeft;
 
+    [Tooltip("How long 24h take in the game (in seconds)")]
     [SerializeField] //The duration of a cycle
     private float dayDuration = 600.0f;
+
+    [HideInInspector]
     public bool isDay = true; //Is it currently day?
     private bool startNight = true; //Is it between any dayStart and earlyDayEnd?
     private bool startLateDay = false; //Does the day or night end without the player ending it manually?
+
+    [HideInInspector]
     public Quaternion rotation;
+
+    [HideInInspector]
     public Vector3 spawnPos;
+
+    [HideInInspector]
     public Quaternion spawnRotation;
 
     [SerializeField]
