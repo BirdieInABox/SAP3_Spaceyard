@@ -1332,7 +1332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1708180122443769658, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2563
+      value: 2600
       objectReference: {fileID: 0}
     - target: {fileID: 1708180122443769658, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1340,7 +1340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1708180122443769658, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9339
+      value: -9031
       objectReference: {fileID: 0}
     - target: {fileID: 1708180122443769658, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1376,7 +1376,7 @@ PrefabInstance:
       objectReference: {fileID: 1969519083}
     - target: {fileID: 4553786547208145431, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
       propertyPath: moveSpeed
-      value: 1850
+      value: 1825
       objectReference: {fileID: 0}
     - target: {fileID: 4652940458363145662, guid: d68b5d9a862c09a4594efd96e0a2d0b0, type: 3}
       propertyPath: m_Constraints
@@ -18452,8 +18452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 383908571}
-  cameraHeight: 1500
-  cameraDistance: 1000
+  cameraHeight: 2000
+  cameraDistance: 1500
 --- !u!20 &1752117798
 Camera:
   m_ObjectHideFlags: 0
@@ -18479,7 +18479,7 @@ Camera:
     height: 1
   near clip plane: 1000
   far clip plane: 10000
-  field of view: 90
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
