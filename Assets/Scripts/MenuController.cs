@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class MenuController : MonoBehaviour
@@ -141,5 +142,10 @@ public class MenuController : MonoBehaviour
         mainMenu.SetActive(!mainMenu.activeSelf);
         //toggle settings
         settingsMenu.SetActive(!settingsMenu.activeSelf);
+    }
+
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }
