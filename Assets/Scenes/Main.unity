@@ -2819,7 +2819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8565928098315046083, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: m_Name
-      value: NPC 5
+      value: Victor
       objectReference: {fileID: 0}
     - target: {fileID: 8950104764470177625, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: tasks
@@ -3482,7 +3482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8565928098315046083, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: m_Name
-      value: NPC 4
+      value: Beni
       objectReference: {fileID: 0}
     - target: {fileID: 8950104764470177625, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: tasks
@@ -11457,7 +11457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8565928098315046083, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: m_Name
-      value: NPC 3
+      value: Sophie
       objectReference: {fileID: 0}
     - target: {fileID: 8950104764470177625, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: tasks
@@ -16057,7 +16057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8565928098315046083, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: m_Name
-      value: NPC 2
+      value: Mael
       objectReference: {fileID: 0}
     - target: {fileID: 8950104764470177625, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: tasks
@@ -16863,7 +16863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8565928098315046083, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: m_Name
-      value: 'NPC '
+      value: Millin
       objectReference: {fileID: 0}
     - target: {fileID: 8950104764470177625, guid: 677145d622a824e4eb8e377a41e5205d, type: 3}
       propertyPath: tasks
@@ -19733,7 +19733,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5925830667334805045, guid: bf6a48bf9433c7040b2942cd159ff10f, type: 3}
       propertyPath: m_Name
-      value: 'Mainquest NPC '
+      value: Jack
       objectReference: {fileID: 0}
     - target: {fileID: 8892038409346944864, guid: bf6a48bf9433c7040b2942cd159ff10f, type: 3}
       propertyPath: key
