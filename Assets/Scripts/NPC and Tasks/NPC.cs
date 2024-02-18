@@ -46,6 +46,7 @@ public class NPC : MonoBehaviour
     public void StartTime(bool _isDay)
     {
         isDay = _isDay;
+        ChangeTransparency(false);
         OnReset();
     }
 
@@ -126,7 +127,7 @@ public class NPC : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            ChangeTransparency(isDiurnal == isDay);
+            ChangeTransparency(false);
         }
     }
 
