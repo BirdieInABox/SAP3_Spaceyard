@@ -81,9 +81,15 @@ public class ClockController : MonoBehaviour
     [SerializeField]
     private LightChanges lightSource;
 
+    [SerializeField]
+    private SleepDialogue sleepUI;
+
+    private bool isFirstDay = true;
+
     // Start is called before the first frame update
     void Start()
     {
+        isFirstDay = true;
         spawnRotation = player.gameObject.transform.rotation;
         spawnPos = player.gameObject.transform.position;
         //Calculate x/24 into degrees of a circle with 0 being minimum and 24 being maximum, in base config 0=0°, 24=360°
@@ -94,6 +100,7 @@ public class ClockController : MonoBehaviour
         lateDayEndDegrees = (int)(minimum - (lateDayEnd * dayDuration * percentile));
         nightStartDegrees = (int)(minimum - (nightStart * dayDuration * percentile));
         nightEndDegrees = (int)(minimum - (nightEnd * dayDuration * percentile));
+        Time.timeScale = 1;
         StartDay();
     }
 
@@ -175,13 +182,14 @@ public class ClockController : MonoBehaviour
 
         player.gameObject.transform.position = spawnPos;
         player.gameObject.transform.rotation = spawnRotation;
+        player.ResetAllInteractables();
 
         //reset bools and timer%
         timeLeft = dayDuration;
         isDay = true;
-        startLateDay = false;
         startNight = true;
         Alarm();
+        startLateDay = false;
     }
 
     //Called when player wakes up
@@ -206,5 +214,9 @@ public class ClockController : MonoBehaviour
         }
         //Change colour to day/night colour
         lightSource.ChangeColor(isDay);
+        if (!isFirstDay)
+            sleepUI.DialogueStart(startLateDay, !isDay);
+
+        isFirstDay = false;
     }
 }

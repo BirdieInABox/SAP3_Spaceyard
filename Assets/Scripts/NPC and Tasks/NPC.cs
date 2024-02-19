@@ -46,7 +46,7 @@ public class NPC : MonoBehaviour
     public void StartTime(bool _isDay)
     {
         isDay = _isDay;
-        ChangeTransparency(false);
+        ChangeTransparency(isDay == isDiurnal);
         OnReset();
     }
 
@@ -106,29 +106,16 @@ public class NPC : MonoBehaviour
         }
     }
 
+    public void EndDialogue()
+    {
+        dialogueSystem.EndDialogue();
+    }
     //Gets called when player finishes today's task
     public void FinishTask()
     {
         taskDone = true;
         affection++;
         journal.RemoveEntry(this.name);
-    }
-
-    //If player gets close, become visible
-    private void OnTriggerEnter(Collider other)
-    {
-        if ((other.gameObject.tag == "Player"))
-        {
-            ChangeTransparency(isDiurnal == isDay);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            ChangeTransparency(false);
-        }
     }
 
     //Changes the NPC's transparency

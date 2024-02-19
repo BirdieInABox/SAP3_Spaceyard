@@ -21,6 +21,7 @@ public class Hotbar : MonoBehaviour
 
     //Enable/Disable scroll
     private bool canScroll = true;
+    public bool isPaused = false;
 
     [SerializeField] //The amount of time needed between scrolls
     private float scrollCDTime = 0.15f;
@@ -94,7 +95,6 @@ public class Hotbar : MonoBehaviour
         }
     }
 
-
     public void RemoveItem(ItemData data)
     {
         Debug.Log("Remove");
@@ -156,11 +156,75 @@ public class Hotbar : MonoBehaviour
         slots[index].transform.localScale = new Vector3(1.15f, 1.15f, 1);
     }
 
+    //Get inputs
+    void OnGUI()
+    {
+        //If keyboard input
+        if (!isPaused && Event.current.isKey && Event.current.type == EventType.KeyDown)
+        {
+            //Get the input as string
+            string keyCode = Event.current.keyCode.ToString();
+
+            //If the pressed key is a number, set index of hotbar to number pressed -1
+
+            switch (keyCode)
+            {
+                case "Alpha1":
+                    ResetSlot();
+                    index = 0;
+                    HighlightSlot();
+                    break;
+                case "Alpha2":
+                    ResetSlot();
+                    index = 1;
+                    HighlightSlot();
+                    break;
+                case "Alpha3":
+                    ResetSlot();
+                    index = 2;
+                    HighlightSlot();
+                    break;
+                case "Alpha4":
+                    ResetSlot();
+                    index = 3;
+                    HighlightSlot();
+                    break;
+                case "Alpha5":
+                    ResetSlot();
+                    index = 4;
+                    HighlightSlot();
+                    break;
+                case "Alpha6":
+                    ResetSlot();
+                    index = 5;
+                    HighlightSlot();
+                    break;
+                case "Alpha7":
+                    ResetSlot();
+                    index = 6;
+                    HighlightSlot();
+                    break;
+                case "Alpha8":
+                    ResetSlot();
+                    index = 7;
+                    HighlightSlot();
+                    break;
+                case "Alpha9":
+                    ResetSlot();
+                    index = 8;
+                    HighlightSlot();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     //Unity Input System, getting the direction the scroll wheel is being scrolled in
     public void OnScrollWheel(InputValue value)
     {
         //If scrolling is not on cooldown
-        if (canScroll)
+        if (!isPaused && canScroll)
         {
             //if scrolling towards the right and hasn't reached the end of the hotbar yet
             if ((index >= 0) && (index < slots.Count - 1) && (value.Get<Vector2>().y < 0))

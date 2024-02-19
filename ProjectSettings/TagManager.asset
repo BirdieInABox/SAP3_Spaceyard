@@ -9,6 +9,7 @@ TagManager:
   - Bed
   - Pickup
   - Chest
+  - Gate
   layers:
   - Default
   - TransparentFX

@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private PickupItem pickupObject; //A pickupable object within the touch sensor
     private ChestController chest; //A chest within the touch sensor
     private NPC interactNPC; //An NPC within the touch sensor
+    private MainQuestGate gate; //The interactable gate
 
     [SerializeField]
     private GameObject journalUI;
@@ -60,16 +61,17 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.velocity = new Vector3(0, 0, 0);
+            rb.velocity = Vector3.zero;
         }
         //Walking animation
-        anims.SetBool("Walking", rb.velocity != new Vector3(0, 0, 0));
+        anims.SetBool("Walking", rb.velocity != Vector3.zero);
     }
 
     //Unity Input System, value carrying a vector2 with the movement direction
     public void OnMove(InputValue value)
     {
         direction = value.Get<Vector2>();
+        Debug.Log(direction);
     }
 
     //Unity Input system
@@ -123,16 +125,30 @@ public class PlayerController : MonoBehaviour
             {
                 chest.Interaction(this);
             }
+            else if (gate != null)
+            {
+                if (!inDialogue)
+                {
+                    gate.InteractionStart();
+                }
+                else
+                {
+                    gate.InteractionContinue();
+                }
+            }
         }
     }
 
     public void OnJournal(InputValue value)
     {
-        journalUI.SetActive(!journalUI.activeSelf);
-        stopMovement = !stopMovement;
-        inventory.hotbar.gameObject.GetComponent<PlayerInput>().enabled =
-            !inventory.hotbar.gameObject.GetComponent<PlayerInput>().enabled;
-        ToggleCursor();
+        if ((!stopMovement && !journalUI.activeSelf) || (stopMovement && journalUI.activeSelf))
+        {
+            journalUI.SetActive(!journalUI.activeSelf);
+            stopMovement = !stopMovement;
+            inventory.hotbar.gameObject.GetComponent<PlayerInput>().enabled =
+                !inventory.hotbar.gameObject.GetComponent<PlayerInput>().enabled;
+            ToggleCursor();
+        }
     }
 
     private void ToggleCursor()
@@ -162,6 +178,8 @@ public class PlayerController : MonoBehaviour
             pickupObject = other.gameObject.GetComponent<PickupItem>();
         else if (other.gameObject.tag == "Chest")
             chest = other.gameObject.GetComponent<ChestController>();
+        else if (other.gameObject.tag == "Gate")
+            gate = other.gameObject.GetComponent<MainQuestGate>();
     }
 
     //Touch sensor
@@ -175,6 +193,8 @@ public class PlayerController : MonoBehaviour
             pickupObject = null;
         else if (other.gameObject.tag == "Chest")
             chest = null;
+        else if (other.gameObject.tag == "Gate")
+            gate = null;
     }
 
     //Allow dialogue to change inDIalogue
@@ -191,8 +211,36 @@ public class PlayerController : MonoBehaviour
 
     public void ResetPickup()
     {
-        Debug.Log("Here");
-
         pickupObject = null;
+    }
+
+    public void ResetNPC()
+    {
+        if (interactNPC != null)
+            interactNPC.EndDialogue();
+        interactNPC = null;
+        inDialogue = false;
+    }
+
+    public void ResetGate()
+    {
+        if (gate != null)
+            gate.EndDialogue();
+        gate = null;
+        inDialogue = false;
+    }
+
+    private void ResetChest()
+    {
+        chest = null;
+    }
+
+    public void ResetAllInteractables()
+    {
+        ResetPickup();
+        ResetInteractable();
+        ResetNPC();
+        ResetGate();
+        ResetChest();
     }
 }

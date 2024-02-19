@@ -41,6 +41,7 @@ public class MenuController : MonoBehaviour
 
     void Awake()
     {
+        player.stopMovement = false;
         if (!PlayerPrefs.HasKey("MasterVolume"))
         {
             PlayerPrefs.SetFloat("MasterVolume", 0.2f);
@@ -87,6 +88,10 @@ public class MenuController : MonoBehaviour
         {
             Time.timeScale = 1;
             player.stopMovement = !player.stopMovement;
+
+            //toggle hotbar scrollability
+            player.inventory.hotbar.gameObject.GetComponent<Hotbar>().isPaused =
+                !player.inventory.hotbar.gameObject.GetComponent<Hotbar>().isPaused;
             //deactivate all menus manually
             settingsMenu.SetActive(false);
             bg.SetActive(false);
@@ -117,8 +122,8 @@ public class MenuController : MonoBehaviour
         //toggle player movement
         player.stopMovement = !player.stopMovement;
         //toggle hotbar scrollability
-        player.inventory.hotbar.gameObject.GetComponent<PlayerInput>().enabled =
-            !player.inventory.hotbar.gameObject.GetComponent<PlayerInput>().enabled;
+        player.inventory.hotbar.gameObject.GetComponent<Hotbar>().isPaused =
+            !player.inventory.hotbar.gameObject.GetComponent<Hotbar>().isPaused;
         //toggle cursor
         ToggleCursor();
     }

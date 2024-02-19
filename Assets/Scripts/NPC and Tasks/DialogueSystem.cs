@@ -99,4 +99,10 @@ public class DialogueSystem : MonoBehaviour
             textContent.text = lines[index];
         }
     }
+
+    public void EndDialogue()
+    {
+        textContent.SetText(string.Empty);
+        gameObject.SetActive(false);
+    }
 }
